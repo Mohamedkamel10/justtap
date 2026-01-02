@@ -1,4 +1,6 @@
-const username = location.pathname.split('/').pop();
+const params = new URLSearchParams(window.location.search);
+const username = params.get("user");
+
 const users = JSON.parse(localStorage.getItem("users") || "{}");
 const user = users[username];
 
