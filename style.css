@@ -1,0 +1,49 @@
+body{
+ font-family:Cairo,sans-serif;
+ background:#f0f0f0;
+ padding:30px;
+ direction:rtl
+}
+.card{
+ background:#fff;
+ width:400px;
+ border-radius:25px;
+ box-shadow:0 10px 35px rgba(0,0,0,.12);
+ overflow:hidden;
+ margin:auto
+}
+.cover{
+ height:200px;
+ background-size:cover;
+ background-position:center
+}
+.avatar{
+ width:130px;
+ height:130px;
+ border-radius:50%;
+ border:6px solid #fff;
+ background-size:cover;
+ background-position:center;
+ margin:-65px auto 0
+}
+.content{text-align:center;padding:20px}
+.socials a{margin:10px;font-size:26px;color:black}
+.admin{
+ max-width:420px;
+ margin:auto;
+ background:#fff;
+ padding:20px;
+ border-radius:20px
+}
+.admin input,.admin button{
+ width:100%;
+ margin:8px 0;
+ padding:12px;
+ border-radius:10px;
+ border:1px solid #ddd
+}
+.admin button{
+ background:black;
+ color:white;
+ font-size:16px
+}
