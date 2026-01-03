@@ -4,32 +4,21 @@ const username = params.get("user");
 const users = JSON.parse(localStorage.getItem("users") || "{}");
 const user = users[username];
 
-if (!user) {
-  document.body.innerHTML = "<h2>User not found</h2>";
-  throw "";
-}
-
-document.getElementById("name").textContent = user.name;
-document.getElementById("job").textContent = user.job;
-document.getElementById("avatar").style.backgroundImage = `url(${user.avatar})`;
-document.getElementById("cover").style.backgroundImage = `url(${user.cover})`;
-
-const box = document.getElementById("socialLinks");
-
-function add(icon, link){
-  if(!link) return;
-  const a = document.createElement("a");
-  a.href = link;
-  a.target="_blank";
-  a.innerHTML = `<i class="fab fa-${icon}"></i>`;
-  box.appendChild(a);
-}
-
-add("facebook", user.socials.facebook);
-add("instagram", user.socials.instagram);
-add("tiktok", user.socials.tiktok);
-add("snapchat", user.socials.snapchat);
-
-if(user.socials.whatsapp){
-  add("whatsapp", "https://wa.me/" + user.socials.whatsapp);
+if(!user){
+ document.body.innerHTML="<h2 style='text-align:center'>User not found</h2>";
+}else{
+ document.getElementById("profile").innerHTML=`
+ <div class="card">
+  <div class="cover" style="background-image:url(${user.cover})"></div>
+  <div class="avatar" style="background-image:url(${user.avatar})"></div>
+  <div class="content">
+   <h2>${user.name}</h2>
+   <p>${user.job}</p>
+   <div class="socials">
+    ${user.instagram?`<a href="${user.instagram}"><i class="fab fa-instagram"></i></a>`:''}
+    ${user.facebook?`<a href="${user.facebook}"><i class="fab fa-facebook"></i></a>`:''}
+    ${user.whatsapp?`<a href="${user.whatsapp}"><i class="fab fa-whatsapp"></i></a>`:''}
+   </div>
+  </div>
+ </div>`;
 }
