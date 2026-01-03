@@ -1,36 +1,63 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
+<title>Admin Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body{
+  font-family: Arial;
+  background:#f2f2f2;
+  padding:30px;
+}
+.container{
+  max-width:500px;
+  margin:auto;
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+}
+input,button{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+}
+button{
+  background:black;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+</style>
 </head>
+
 <body>
-<div class="admin">
-<h2>إدارة البروفايل</h2>
+<div class="container">
 
-<input id="username" placeholder="اسم المستخدم">
-<input id="name" placeholder="الاسم الكامل">
-<input id="job" placeholder="الوظيفة">
+<h2>Add / Edit Profile</h2>
 
-<label>صورة البروفايل</label>
+<input id="username" placeholder="Username (ex: mohamed)">
+<input id="name" placeholder="Full Name">
+<input id="job" placeholder="Job Title">
+
+<label>Avatar</label>
 <input type="file" id="avatar">
 
-<label>صورة الغلاف</label>
+<label>Cover</label>
 <input type="file" id="cover">
 
 <h3>Social Links</h3>
 
 <input id="phone" placeholder="Phone">
 <input id="email" placeholder="Email">
-
 <input id="facebook" placeholder="Facebook URL">
 <input id="instagram" placeholder="Instagram URL">
 <input id="whatsapp" placeholder="WhatsApp Number">
 <input id="tiktok" placeholder="TikTok URL">
 <input id="snapchat" placeholder="Snapchat URL">
-
 
 <button id="saveBtn">Save</button>
 
