@@ -17,10 +17,10 @@ if (!user) {
   throw new Error("No user");
 }
 
-db.collection("users").doc(user).get().then(doc => {
-  if (!doc.exists) {
-    alert("User not found");
-    return;
+db.collection("users").get().then(snap=>{
+  console.log("Users:", snap.size);
+});
+
   }
 
   const d = doc.data();
