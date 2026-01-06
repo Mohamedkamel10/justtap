@@ -10,9 +10,10 @@ firebase.initializeApp({
 const db = firebase.firestore();
 
 const user = new URLSearchParams(window.location.search).get("user");
+
 if (!user) {
   alert("User not found");
-  throw "";
+  throw new Error("No user");
 }
 
 db.collection("users").doc(user).get().then(doc => {
@@ -23,34 +24,35 @@ db.collection("users").doc(user).get().then(doc => {
 
   const d = doc.data();
 
-  document.getElementById("name").innerText = d.name;
-  document.getElementById("job").innerText = d.job;
-  document.getElementById("company").innerText = d.company;
+  document.getElementById("name").innerText = d.name || "";
+  document.getElementById("job").innerText = d.job || "";
+  document.getElementById("company").innerText = d.company || "";
 
   document.getElementById("avatar").src = d.avatar;
   document.getElementById("cover").style.backgroundImage = `url(${d.cover})`;
 
-  d.phone ? document.getElementById("phoneBtn").href = `tel:${d.phone}` : hide("phoneBtn");
-  d.email ? document.getElementById("emailBtn").href = `mailto:${d.email}` : hide("emailBtn");
+  d.phone
+    ? document.getElementById("phoneBtn").href = `tel:${d.phone}`
+    : document.getElementById("phoneBtn").style.display="none";
+
+  d.email
+    ? document.getElementById("emailBtn").href = `mailto:${d.email}`
+    : document.getElementById("emailBtn").style.display="none";
 
   const socials = {
-    whatsapp: "fa-whatsapp",
-    facebook: "fa-facebook",
-    instagram: "fa-instagram",
-    tiktok: "fa-tiktok",
-    snapchat: "fa-snapchat"
+    whatsapp:"fa-whatsapp",
+    facebook:"fa-facebook",
+    instagram:"fa-instagram",
+    tiktok:"fa-tiktok",
+    snapchat:"fa-snapchat"
   };
 
   for (let k in socials) {
     if (d[k]) {
       document.getElementById("socials").innerHTML += `
         <a href="${d[k]}" target="_blank">
-          <i class="fa-brands ${socials[k]}"></i>
+          <i class="fa-brands ${socials[k]}"></i><br>${k}
         </a>`;
     }
   }
 });
-
-function hide(id){
-  document.getElementById(id).style.display = "none";
-}
