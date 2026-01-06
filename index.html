@@ -1,47 +1,107 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Profile</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>JustTap Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="./firebase-config.js"></script>
+  <style>
+    body{
+      background:#f2f2f2;
+      font-family: Arial, sans-serif;
+      display:flex;
+      justify-content:center;
+      padding:30px;
+    }
+    .card{
+      width:350px;
+      background:#fff;
+      border-radius:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,.15);
+      overflow:hidden;
+      text-align:center;
+    }
+    .cover{
+      height:160px;
+      background-size:cover;
+      background-position:center;
+    }
+    .avatar{
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      border:6px solid #fff;
+      margin-top:-60px;
+      object-fit:cover;
+    }
+    h2{ margin:10px 0 5px }
+    p{ margin:3px 0; color:#777 }
 
-<!-- main logic -->
-<script src="./main.js"></script>
+    .actions{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      margin:20px 0;
+    }
+    .actions a{
+      width:55px;
+      height:55px;
+      border-radius:50%;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 5px 15px rgba(0,0,0,.15);
+      color:#000;
+      font-size:22px;
+      text-decoration:none;
+    }
+
+    .socials{
+      background:#f7f7f7;
+      margin:20px;
+      border-radius:20px;
+      padding:20px;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:25px;
+    }
+    .socials a{
+      text-decoration:none;
+      color:#000;
+      text-align:center;
+      width:70px;
+    }
+    .socials i{
+      font-size:38px;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="profile-card">
+<div class="card">
+  <div id="cover" class="cover"></div>
+  <img id="avatar" class="avatar">
 
-  <div class="header-img" id="cover"></div>
+  <h2 id="name"></h2>
+  <p id="job"></p>
+  <p id="company"></p>
 
-  <div class="profile-pic">
-    <img id="avatar">
+  <div class="actions">
+    <a id="emailBtn"><i class="fa-solid fa-envelope"></i></a>
+    <a id="phoneBtn"><i class="fa-solid fa-phone"></i></a>
   </div>
 
-  <div class="content">
-    <h2 id="name"></h2>
-    <div class="job" id="job"></div>
-    <div class="place" id="company"></div>
-
-    <div class="contact-icons">
-      <a id="phoneBtn"><i class="fa-solid fa-phone"></i></a>
-      <a id="emailBtn"><i class="fa-solid fa-envelope"></i></a>
-    </div>
-
-    <div class="social-section">
-      <div class="social-grid" id="socials"></div>
-    </div>
-  </div>
-
+  <div id="socials" class="socials"></div>
 </div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script src="profile.js"></script>
 </body>
