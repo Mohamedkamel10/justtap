@@ -1,3 +1,4 @@
+console.log("JS Loaded");
 firebase.initializeApp({
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
