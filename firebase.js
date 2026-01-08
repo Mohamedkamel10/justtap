@@ -31,8 +31,8 @@ db.collection("users").doc(user).get()
   setImage("avatar", d.avatar);
   setCover("cover", d.cover);
 
-  setLink("phoneBtn", d.phone, v => `tel:${v}`);
-  setLink("emailBtn", d.email, v => `mailto:${v}`);
+  setLink("phone", d.phone, v => `tel:${v}`);
+  setLink("email", d.email, v => `mailto:${v}`);
 
   const socialsMap = {
     facebook: "fa-facebook",
