@@ -41,8 +41,8 @@ db.collection("users").doc(user).get()
   if (d.avatar) document.getElementById("avatar").src = d.avatar;
   if (d.cover) document.getElementById("cover").style.backgroundImage = `url('${d.cover}')`;
 
-  if (d.email) document.getElementById("emailBtn").href = `mailto:${d.email}`;
-  if (d.phone) document.getElementById("phoneBtn").href = `tel:${d.phone}`;
+  if (d.email) document.getElementById("email").href = `mailto:${d.email}`;
+  if (d.phone) document.getElementById("phone").href = `tel:${d.phone}`;
 
   const socials = ["facebook","instagram","snapchat","tiktok","whatsapp"];
   const box = document.getElementById("socials");
