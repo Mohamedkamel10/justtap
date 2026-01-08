@@ -6,19 +6,23 @@ firebase.initializeApp({
 
 const db = firebase.firestore();
 
-const user = new URLSearchParams(window.location.search).get("user");
+const params = new URLSearchParams(window.location.search);
+const user = params.get("user");
+
 if (!user) {
-  alert("User not found");
-  throw "";
+  alert("User not found in URL");
+  throw new Error("No user param");
 }
 
-db.collection("users").doc(user).get().then(doc => {
+db.collection("users").doc(user).get()
+.then(doc => {
   if (!doc.exists) {
-    alert("User not found");
+    alert("User not found in Firestore");
     return;
   }
 
   const d = doc.data();
+  console.log("USER DATA:", d); // مهم جدًا
 
   setText("name", d.name);
   setText("job", d.job);
@@ -30,26 +34,34 @@ db.collection("users").doc(user).get().then(doc => {
   setLink("phoneBtn", d.phone, v => `tel:${v}`);
   setLink("emailBtn", d.email, v => `mailto:${v}`);
 
-  const socials = {
-    whatsapp: d.whatsapp,
-    facebook: d.facebook,
-    instagram: d.instagram,
-    tiktok: d.tiktok,
-    snapchat: d.snapchat
+  const socialsMap = {
+    facebook: "fa-facebook",
+    instagram: "fa-instagram",
+    tiktok: "fa-tiktok",
+    snapchat: "fa-snapchat",
+    whatsapp: "fa-whatsapp"
   };
 
-  for (let k in socials) {
-    if (socials[k]) {
-      document.getElementById("socials").innerHTML += `
-        <a href="${socials[k]}" target="_blank">${k}</a>
+  const socialsDiv = document.getElementById("socials");
+  socialsDiv.innerHTML = "";
+
+  for (let key in socialsMap) {
+    if (d[key]) {
+      socialsDiv.innerHTML += `
+        <a href="${d[key]}" target="_blank">
+          <i class="fa-brands ${socialsMap[key]}"></i>
+        </a>
       `;
     }
   }
+})
+.catch(err => {
+  console.error("Firestore error:", err);
 });
 
 function setText(id, val) {
   const el = document.getElementById(id);
-  if (el && val) el.innerText = val;
+  if (el) el.innerText = val || "";
 }
 
 function setImage(id, val) {
@@ -59,7 +71,7 @@ function setImage(id, val) {
 
 function setCover(id, val) {
   const el = document.getElementById(id);
-  if (el && val) el.style.backgroundImage = `url('${val}')`;
+  if (el && val) el.style.backgroundImage = `url("${val}")`;
 }
 
 function setLink(id, val, fn) {
