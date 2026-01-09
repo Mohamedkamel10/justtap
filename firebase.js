@@ -1,4 +1,3 @@
-// Firebase config
 firebase.initializeApp({
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
@@ -7,20 +6,21 @@ firebase.initializeApp({
 
 const db = firebase.firestore();
 
-// get user from URL
-const user = new URLSearchParams(window.location.search).get("user");
+const params = new URLSearchParams(window.location.search);
+const user = params.get("user");
+
 if (!user) {
   alert("User not found");
-  throw new Error("No user in URL");
+  throw new Error("Missing user param");
 }
 
-// helper
 function el(id) {
   return document.getElementById(id);
 }
 
-// get data
-db.collection("users").doc(user).get().then(doc => {
+db.collection("users").doc(user).get()
+.then(function(doc) {
+
   if (!doc.exists) {
     alert("User not found in Firestore");
     return;
@@ -28,30 +28,26 @@ db.collection("users").doc(user).get().then(doc => {
 
   const d = doc.data();
 
-  // text
   if (el("name")) el("name").innerText = d.name || "";
   if (el("job")) el("job").innerText = d.job || "";
   if (el("company")) el("company").innerText = d.company || "";
 
-  // images
   if (el("avatar") && d.avatar) el("avatar").src = d.avatar;
-  if (el("cover") && d.cover)
-    el("cover").style.backgroundImage = `url('${d.cover}')`;
+  if (el("cover") && d.cover) {
+    el("cover").style.backgroundImage = "url('" + d.cover + "')";
+  }
 
-  // email
   if (el("email")) {
-    if (d.email) el("email").href = `mailto:${d.email}`;
+    if (d.email) el("email").href = "mailto:" + d.email;
     else el("email").style.display = "none";
   }
 
-  // phone
   if (el("phone")) {
-    if (d.phone) el("phone").href = `tel:${d.phone}`;
+    if (d.phone) el("phone").href = "tel:" + d.phone;
     else el("phone").style.display = "none";
   }
 
-  // socials
-  const socials = {
+  const icons = {
     facebook: "fa-facebook",
     instagram: "fa-instagram",
     tiktok: "fa-tiktok",
@@ -60,16 +56,17 @@ db.collection("users").doc(user).get().then(doc => {
   };
 
   if (el("socials")) {
-    for (let key in socials) {
+    for (let key in icons) {
       if (d[key]) {
-        el("socials").innerHTML += `
-          <a href="${d[key]}" target="_blank">
-            <i class="fa-brands ${socials[key]}"></i>
-          </a>
-        `;
+        el("socials").innerHTML +=
+          '<a href="' + d[key] + '" target="_blank">' +
+          '<i class="fa-brands ' + icons[key] + '"></i>' +
+          '</a>';
       }
     }
   }
-}).catch(err => {
+
+})
+.catch(function(err) {
   console.error("Firestore error:", err);
 });
