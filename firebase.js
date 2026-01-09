@@ -25,22 +25,28 @@ db.collection("users").doc(user).get()
   document.getElementById("job").innerText = d.job || "";
   document.getElementById("company").innerText = d.company || "";
 
-  if (d.avatar) document.getElementById("avatar").src = d.avatar;
-  if (d.cover) document.getElementById("cover").style.backgroundImage = `url('${d.cover}')`;
+ function el(id) {
+  return document.getElementById(id);
+}
 
-  if (d.phone) document.getElementById("phone").href = `tel:${d.phone}`;
-  else document.getElementById("phoneBtn").style.display = "none";
+if (el("cover") && d.cover) {
+  el("cover").style.backgroundImage = `url('${d.cover}')`;
+}
 
-  if (d.email) document.getElementById("email").href = `mailto:${d.email}`;
-  else document.getElementById("emailBtn").style.display = "none";
+if (el("avatar") && d.avatar) {
+  el("avatar").src = d.avatar;
+}
 
-  const socials = ["facebook","instagram","tiktok","snapchat"];
-  socials.forEach(s => {
-    if (d[s]) {
-      document.getElementById("socials").innerHTML += `
-        <a href="${d[s]}" target="_blank">
-          <i class="fa-brands fa-${s}"></i>
-        </a>
+if (el("phone")) {
+  if (d.phone) el("phone").href = `tel:${d.phone}`;
+  else el("phone").style.display = "none";
+}
+
+if (el("email")) {
+  if (d.email) el("email").href = `mailto:${d.email}`;
+  else el("email").style.display = "none";
+}
+
       `;
     }
   });
