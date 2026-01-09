@@ -1,60 +1,79 @@
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<script>
-console.log("JS WORKING");
-
-const firebaseConfig = {
+// Firebase config
+firebase.initializeApp({
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
   projectId: "just-tap-4e85e"
-};
+});
 
-firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-const params = new URLSearchParams(window.location.search);
-const user = params.get("user");
-
-console.log("USER:", user);
+// get user from URL
+const user = new URLSearchParams(window.location.search).get("user");
 
 if (!user) {
-  alert("No user param");
-  throw "";
+  alert("User not found in URL");
+  throw new Error("No user param");
 }
 
 db.collection("users").doc(user).get()
 .then(doc => {
-  console.log("DOC EXISTS:", doc.exists);
-
   if (!doc.exists) {
-    alert("User not found");
+    alert("User not found in Firestore");
     return;
   }
 
   const d = doc.data();
-  console.log("DATA:", d);
 
-  document.getElementById("name").innerText = d.name || "";
-  document.getElementById("job").innerText = d.job || "";
+  setText("name", d.name);
+  setText("job", d.job);
+  setText("company", d.company);
 
-  if (d.avatar) document.getElementById("avatar").src = d.avatar;
-  if (d.cover) document.getElementById("cover").style.backgroundImage = `url('${d.cover}')`;
+  setImage("avatar", d.avatar);
+  setCover("cover", d.cover);
 
-  if (d.email) document.getElementById("emailBtn").href = `mailto:${d.email}`;
-  if (d.phone) document.getElementById("phoneBtn").href = `tel:${d.phone}`;
+  setLink("phone", d.phone, v => `tel:${v}`);
+  setLink("email", d.email, v => `mailto:${v}`);
 
-  const socials = ["facebook","instagram","snapchat","tiktok","whatsapp"];
-  const box = document.getElementById("socials");
-  box.innerHTML = "";
+  const socials = {
+    facebook: d.facebook,
+    instagram: d.instagram,
+    tiktok: d.tiktok,
+    snapchat: d.snapchat
+  };
 
-  socials.forEach(s => {
-    if (d[s]) {
-      box.innerHTML += `<a href="${d[s]}" target="_blank">${s}</a>`;
+  for (let k in socials) {
+    if (socials[k]) {
+      document.getElementById("socials").innerHTML += `
+        <a href="${socials[k]}" target="_blank">
+          <i class="fa-brands fa-${k}"></i>
+        </a>
+      `;
     }
-  });
+  }
 })
 .catch(err => {
-  console.error("FIRESTORE ERROR:", err);
+  console.error("Firestore error:", err);
 });
-</script>
+
+// helpers
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el && val) el.innerText = val;
+}
+
+function setImage(id, val) {
+  const el = document.getElementById(id);
+  if (el && val) el.src = val;
+}
+
+function setCover(id, val) {
+  const el = document.getElementById(id);
+  if (el && val) el.style.backgroundImage = `url('${val}')`;
+}
+
+function setLink(id, val, fn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (val) el.href = fn(val);
+  else el.style.display = "none";
+}
