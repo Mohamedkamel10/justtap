@@ -1,4 +1,3 @@
-// Firebase config
 firebase.initializeApp({
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
@@ -7,73 +6,45 @@ firebase.initializeApp({
 
 const db = firebase.firestore();
 
-// get user from URL
 const user = new URLSearchParams(window.location.search).get("user");
-
-if (!user) {
-  alert("User not found in URL");
-  throw new Error("No user param");
-}
+console.log("USER:", user);
 
 db.collection("users").doc(user).get()
 .then(doc => {
+  console.log("DOC EXISTS:", doc.exists);
+
   if (!doc.exists) {
-    alert("User not found in Firestore");
+    alert("User not found");
     return;
   }
 
   const d = doc.data();
+  console.log("DATA:", d);
 
-  setText("name", d.name);
-  setText("job", d.job);
-  setText("company", d.company);
+  document.getElementById("name").innerText = d.name || "";
+  document.getElementById("job").innerText = d.job || "";
+  document.getElementById("company").innerText = d.company || "";
 
-  setImage("avatar", d.avatar);
-  setCover("cover", d.cover);
+  if (d.avatar) document.getElementById("avatar").src = d.avatar;
+  if (d.cover) document.getElementById("cover").style.backgroundImage = `url('${d.cover}')`;
 
-  setLink("phoneBtn", d.phone, v => `tel:${v}`);
-  setLink("emailBtn", d.email, v => `mailto:${v}`);
+  if (d.phone) document.getElementById("phone").href = `tel:${d.phone}`;
+  else document.getElementById("phoneBtn").style.display = "none";
 
-  const socials = {
-    facebook: d.facebook,
-    instagram: d.instagram,
-    tiktok: d.tiktok,
-    snapchat: d.snapchat
-  };
+  if (d.email) document.getElementById("email").href = `mailto:${d.email}`;
+  else document.getElementById("emailBtn").style.display = "none";
 
-  for (let k in socials) {
-    if (socials[k]) {
+  const socials = ["facebook","instagram","tiktok","snapchat"];
+  socials.forEach(s => {
+    if (d[s]) {
       document.getElementById("socials").innerHTML += `
-        <a href="${socials[k]}" target="_blank">
-          <i class="fa-brands fa-${k}"></i>
+        <a href="${d[s]}" target="_blank">
+          <i class="fa-brands fa-${s}"></i>
         </a>
       `;
     }
-  }
+  });
 })
 .catch(err => {
-  console.error("Firestore error:", err);
+  console.error("ERROR:", err);
 });
-
-// helpers
-function setText(id, val) {
-  const el = document.getElementById(id);
-  if (el && val) el.innerText = val;
-}
-
-function setImage(id, val) {
-  const el = document.getElementById(id);
-  if (el && val) el.src = val;
-}
-
-function setCover(id, val) {
-  const el = document.getElementById(id);
-  if (el && val) el.style.backgroundImage = `url('${val}')`;
-}
-
-function setLink(id, val, fn) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (val) el.href = fn(val);
-  else el.style.display = "none";
-}
