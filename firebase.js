@@ -57,12 +57,15 @@ window.onload = function () {
       const socialsDiv = document.getElementById("socials");
       socialsDiv.innerHTML = "";
 
-      if (data.facebook) addSocial("facebook", data.facebook);
-      if (data.instagram) addSocial("instagram", data.instagram);
-      if (data.tiktok) addSocial("tiktok", data.tiktok);
-      if (data.snapchat) addSocial("snapchat", data.snapchat);
-
-    })
+      if (data.socials) {
+        Object.keys(data.socials).forEach((key) => {
+          const link = document.createElement("a");
+          link.href = data.socials[key];
+          link.target = "_blank";
+          link.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
+          socialsDiv.appendChild(link);
+        });
+      }
     .catch((err) => {
       console.error("Firestore error:", err);
     });
