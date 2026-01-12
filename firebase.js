@@ -20,8 +20,16 @@ if (!username) {
   console.error("No user in URL");
 }
 
-// 🔹 Load user data AFTER page loaded
+// 🔹 Load user data
 window.onload = function () {
+
+  // ✅ صور ثابتة من assets (مش من Firestore)
+  document.getElementById("avatar").src =
+    "https://raw.githubusercontent.com/Mohamedkamel10/justtap/main/assets/images/avatar.jpg";
+
+  document.getElementById("cover").style.backgroundImage =
+    "url('https://raw.githubusercontent.com/Mohamedkamel10/justtap/main/assets/images/cover.jpg')";
+
   db.collection("users").doc(username).get()
     .then((doc) => {
       if (!doc.exists) {
@@ -36,18 +44,6 @@ window.onload = function () {
       document.getElementById("job").innerText = data.job || "";
       document.getElementById("company").innerText = data.company || "";
 
-      // Images
-      if (data.avatar) {
-        document.getElementById("avatar").src =
-  "https://github.com/Mohamedkamel10/justtap/assets/images/avatar.jpg";
-
-      }
-
-      if (data.cover) {
-        document.getElementById("cover").style.backgroundImage =
-  "https://github.com/Mohamedkamel10/justtap/assets/images/cover.jpg')";
-      }
-
       // Actions
       if (data.email) {
         document.getElementById("email").href = `mailto:${data.email}`;
@@ -61,17 +57,23 @@ window.onload = function () {
       const socialsDiv = document.getElementById("socials");
       socialsDiv.innerHTML = "";
 
-      if (data.socials) {
-        Object.keys(data.socials).forEach((key) => {
-          const link = document.createElement("a");
-          link.href = data.socials[key];
-          link.target = "_blank";
-          link.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
-          socialsDiv.appendChild(link);
-        });
-      }
+      if (data.facebook) addSocial("facebook", data.facebook);
+      if (data.instagram) addSocial("instagram", data.instagram);
+      if (data.tiktok) addSocial("tiktok", data.tiktok);
+      if (data.snapchat) addSocial("snapchat", data.snapchat);
+
     })
     .catch((err) => {
       console.error("Firestore error:", err);
     });
 };
+
+// 🔹 Helper function
+function addSocial(name, url) {
+  const socialsDiv = document.getElementById("socials");
+  const link = document.createElement("a");
+  link.href = url;
+  link.target = "_blank";
+  link.innerHTML = `<i class="fa-brands fa-${name}"></i>`;
+  socialsDiv.appendChild(link);
+}
