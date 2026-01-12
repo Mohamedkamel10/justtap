@@ -6,7 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
 
   <style>
     body{
@@ -40,45 +43,24 @@
     h2{ margin:10px 0 5px }
     p{ margin:3px 0; color:#777 }
 
-    .actions{
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      margin:20px 0;
-    }
-    .actions a{
-      width:55px;
-      height:55px;
-      border-radius:50%;
-      background:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      box-shadow:0 5px 15px rgba(0,0,0,.15);
-      color:#000;
-      font-size:22px;
-      text-decoration:none;
-    }
+    /* ===== FIX ICONS ===== */
+.actions a,
+.socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .socials{
-      background:#f7f7f7;
-      margin:20px;
-      border-radius:20px;
-      padding:20px;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:25px;
-    }
-    .socials a{
-      text-decoration:none;
-      color:#000;
-      text-align:center;
-      width:70px;
-    }
-    .socials i{
-      font-size:38px;
-    }
+.socials i {
+  font-size: 36px;
+  color: #000;
+}
+
+.actions i {
+  font-size: 22px;
+  color: #000;
+}
+
   </style>
 </head>
 <body>
@@ -91,12 +73,13 @@
   <p id="job"></p>
   <p id="company"></p>
 
-  <div class="actions">
-    <a id="email"><i class="fa-solid fa-envelope"></i></a>
-    <a id="phone"><i class="fa-solid fa-phone"></i></a>
-  </div>
+ <div class="actions">
+  <a id="email"><i class="fa-solid fa-envelope"></i></a>
+  <a id="phone"><i class="fa-solid fa-phone"></i></a>
+</div>
 
-  <div id="socials" class="socials"></div>
+<div id="socials" class="socials"></div>
+
 </div>
 
 <!-- Firebase -->
