@@ -39,13 +39,13 @@ window.onload = function () {
       // Images
       if (data.avatar) {
         document.getElementById("avatar").src =
-  "./assets/images/avatar.jpg";
+  "https://github.com/Mohamedkamel10/justtap/assets/images/file.jpg";
 
       }
 
       if (data.cover) {
         document.getElementById("cover").style.backgroundImage =
-  "url('./assets/images/cover.jpg')";
+  "url('https://github.com/Mohamedkamel10/justtap/assets/images/file.jpg')";
       }
 
       // Actions
