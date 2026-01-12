@@ -38,12 +38,14 @@ window.onload = function () {
 
       // Images
       if (data.avatar) {
-        document.getElementById("avatar").src = data.avatar;
+        document.getElementById("avatar").src =
+  "./assets/images/avatar.jpg";
+
       }
 
       if (data.cover) {
         document.getElementById("cover").style.backgroundImage =
-          `url(${data.cover})`;
+  "url('./assets/images/cover.jpg')";
       }
 
       // Actions
