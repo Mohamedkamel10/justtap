@@ -1,91 +1,84 @@
-// ================= Firebase Config =================
+// ================= FIREBASE CONFIG =================
 var firebaseConfig = {
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
   projectId: "just-tap-4e85e",
+  storageBucket: "just-tap-4e85e.firebasestorage.app",
   messagingSenderId: "497081794470",
   appId: "1:497081794470:web:f14285e82562c2292d5967"
 };
 
-// ================= Init Firebase =================
+// ================= INIT FIREBASE =================
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
-// ================= Get user from URL =================
+// ================= GET USER FROM URL =================
 const params = new URLSearchParams(window.location.search);
 const username = params.get("user");
 
-// ================= Load Data =================
+// ================= LOAD DATA =================
 window.onload = function () {
-
   if (!username) {
-    console.error("❌ No user in URL");
+    console.error("No user in URL");
     return;
   }
 
   db.collection("users").doc(username).get()
     .then((doc) => {
-
       if (!doc.exists) {
-        console.error("❌ User not found");
+        console.error("User not found");
         return;
       }
 
-      const d = doc.data();
+      const data = doc.data();
 
-      // ---------- Text ----------
-      document.getElementById("name").innerText = d.name || "";
-      document.getElementById("job").innerText = d.job || "";
-      document.getElementById("company").innerText = d.company || "";
+      // ===== BASIC INFO =====
+      document.getElementById("name").innerText = data.name || "";
+      document.getElementById("job").innerText = data.job || "";
+      document.getElementById("company").innerText = data.company || "";
 
-      // ---------- Images (Assets فقط) ----------
+        // ---------- Images (Assets فقط) ----------
       document.getElementById("avatar").src =
         "assets/images/avatar.jpg";
 
       document.getElementById("cover").style.backgroundImage =
         "url('assets/images/cover.jpg')";
-
-      // ---------- Email ----------
-      const emailEl = document.getElementById("email");
-      if (d.email) {
-        emailEl.href = `mailto:${d.email}`;
-        emailEl.style.display = "flex";
-      } else {
-        emailEl.style.display = "none";
+      // ===== ACTION BUTTONS =====
+      if (data.phone) {
+        const phone = document.getElementById("phone");
+        phone.href = "tel:" + data.phone;
+        phone.style.display = "flex";
       }
 
-      // ---------- Phone ----------
-      const phoneEl = document.getElementById("phone");
-      if (d.phone) {
-        phoneEl.href = `tel:${d.phone}`;
-        phoneEl.style.display = "flex";
-      } else {
-        phoneEl.style.display = "none";
+      if (data.email) {
+        const email = document.getElementById("email");
+        email.href = "mailto:" + data.email;
+        email.style.display = "flex";
       }
 
-      // ---------- Social Links ----------
+      // ===== SOCIAL ICONS =====
       const socialsDiv = document.getElementById("socials");
       socialsDiv.innerHTML = "";
 
-      const socials = {
-        facebook: d.facebook,
-        instagram: d.instagram,
-        snapchat: d.snapchat,
-        tiktok: d.tiktok
+      const socialIcons = {
+        facebook: "facebook-f",
+        instagram: "instagram",
+        snapchat: "snapchat",
+        twitter: "x-twitter",
+        whatsapp: "whatsapp"
       };
 
-      for (let key in socials) {
-        if (socials[key]) {
-          socialsDiv.innerHTML += `
-            <a href="${socials[key]}" target="_blank">
-              <i class="fa-brands fa-${key}"></i>
-            </a>
-          `;
+      Object.keys(socialIcons).forEach((key) => {
+        if (data[key]) {
+          const a = document.createElement("a");
+          a.href = data[key];
+          a.target = "_blank";
+          a.innerHTML = `<i class="fa-brands fa-${socialIcons[key]}"></i>`;
+          socialsDiv.appendChild(a);
         }
-      }
-
+      });
     })
-    .catch((err) => {
-      console.error("🔥 Firestore Error:", err);
+    .catch((error) => {
+      console.error("Firestore error:", error);
     });
 };
