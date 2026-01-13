@@ -64,7 +64,7 @@ window.onload = function () {
         facebook: "facebook-f",
         instagram: "instagram",
         snapchat: "snapchat",
-        twitter: "x-twitter",
+        tiktok: "tiktok",
         whatsapp: "whatsapp"
       };
 
