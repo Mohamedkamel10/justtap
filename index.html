@@ -44,22 +44,32 @@
     p{ margin:3px 0; color:#777 }
 
     /* ===== FIX ICONS ===== */
+.actions,
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
 .actions a,
 .socials a {
+  width: 48px;
+  height: 48px;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
+.actions i,
 .socials i {
-  font-size: 36px;
-  color: #000;
+  font-size: 20px;
 }
 
-.actions i {
-  font-size: 22px;
-  color: #000;
-}
 
   </style>
 </head>
