@@ -56,27 +56,36 @@ window.onload = function () {
         email.style.display = "flex";
       }
 
-      // ===== SOCIAL ICONS =====
-      const socialsDiv = document.getElementById("socials");
-      socialsDiv.innerHTML = "";
+      const socials = document.getElementById("socials");
+socials.innerHTML = "";
 
-      const socialIcons = {
-        facebook: "facebook-f",
-        instagram: "instagram",
-        snapchat: "snapchat",
-        tiktok: "tiktok",
-        whatsapp: "whatsapp"
-      };
+function addSocial(icon, link) {
+  const a = document.createElement("a");
+  a.href = link;
+  a.target = "_blank";
 
-      Object.keys(socialIcons).forEach((key) => {
-        if (data[key]) {
-          const a = document.createElement("a");
-          a.href = data[key];
-          a.target = "_blank";
-          a.innerHTML = `<i class="fa-brands fa-${socialIcons[key]}"></i>`;
-          socialsDiv.appendChild(a);
-        }
-      });
+  const i = document.createElement("i");
+  i.className = `fa-brands fa-${icon}`;
+
+  a.appendChild(i);
+  socials.appendChild(a);
+}
+
+if (data.facebook) {
+  addSocial("facebook", data.facebook);
+}
+
+if (data.instagram) {
+  addSocial("instagram", data.instagram);
+}
+
+if (data.snapchat) {
+  addSocial("snapchat", data.snapchat);
+}
+      if (data.tiktok) {
+  addSocial("tiktok", data.tiktok);
+}
+
     })
     .catch((error) => {
       console.error("Firestore error:", error);
