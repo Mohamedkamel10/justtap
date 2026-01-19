@@ -42,17 +42,17 @@ socialsDiv.innerHTML = "";
 
 if (data.socials) {
   Object.keys(data.socials).forEach((key) => {
-    const box = document.createElement("a");
-    box.className = "social-box";
-    box.href = data.socials[key];
-    box.target = "_blank";
+    const a = document.createElement("a");
+    a.className = "social-box";
+    a.href = data.socials[key];
+    a.target = "_blank";
 
-    box.innerHTML = `
+    a.innerHTML = `
       <i class="fa-brands fa-${key}"></i>
       <span>${key}</span>
     `;
 
-    socialsDiv.appendChild(box);
+    socialsDiv.appendChild(a);
   });
 }
   });
