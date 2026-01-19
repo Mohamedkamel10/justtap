@@ -1,85 +1,55 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+/* ===== SOCIAL GRID ===== */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  padding: 20px;
 }
 
-.card {
-  width: 340px;
-  background: #fff;
-  border-radius: 25px;
+.social-box {
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 18px 10px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  overflow: hidden;
-}
-
-.cover {
-  height: 140px;
-  background: url("/justtap/assets/images/cover.jpg") center/cover no-repeat;
-}
-
-.avatar {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 6px solid #fff;
-  margin-top: -55px;
-}
-
-h2 {
-  margin: 12px 0 5px;
-}
-
-p {
-  color: #777;
-  margin-bottom: 20px;
-}
-
-/* ====== ICON BOX ====== */
-.box {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding: 15px;
-  flex-wrap: wrap;
-}
-
-.icon {
-  width: 55px;
-  height: 55px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 26px;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s ease;
   text-decoration: none;
+  color: #000;
+  transition: all 0.35s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-/* Hover Effect */
-.icon:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+.social-box i {
+  font-size: 38px;
+  margin-bottom: 8px;
+  transition: transform 0.35s ease;
 }
 
-/* ====== Phone & Mail ====== */
-.phone { background: #2ecc71; }
-.mail  { background: #e74c3c; }
+.social-box span {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
 
-/* ====== Social Colors ====== */
+/* Hover Animation */
+.social-box:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+}
+
+.social-box:hover i {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+/* Center last icon if odd */
+.social-grid a:last-child:nth-child(odd) {
+  grid-column: span 2;
+  width: 55%;
+  margin: auto;
+}
+
+/* ===== Brand Colors ===== */
+.fa-whatsapp { color: #25d366; }
 .fa-facebook { color: #1877f2; }
 .fa-instagram { color: #e1306c; }
+.fa-tiktok { color: #000; }
 .fa-linkedin { color: #0a66c2; }
-.fa-whatsapp { color: #25d366; }
 .fa-twitter { color: #1da1f2; }
-
-/* Social Icons Style */
-.socials a {
-  background: #f4f4f4;
-  color: inherit;
-}
