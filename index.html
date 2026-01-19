@@ -2,111 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>JustTap Profile</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>justtap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Font Awesome -->
-<link
- <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- ✅ Font Awesome (سبب اختفاء الايكونات) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
 
-  <link rel="stylesheet" href="style.css">
+  <!-- ✅ CSS -->
+  <link rel="stylesheet" href="/justtap/style.css" />
 
-/>
-
-  <style>
-    body{
-      background:#f2f2f2;
-      font-family: Arial, sans-serif;
-      display:flex;
-      justify-content:center;
-      padding:30px;
-    }
-    .card{
-      width:350px;
-      background:#fff;
-      border-radius:25px;
-      box-shadow:0 10px 30px rgba(0,0,0,.15);
-      overflow:hidden;
-      text-align:center;
-    }
-    .cover{
-      height:160px;
-      background-size:cover;
-      background-position:center;
-    }
-    .avatar{
-      width:120px;
-      height:120px;
-      border-radius:50%;
-      border:6px solid #fff;
-      margin-top:-60px;
-      object-fit:cover;
-    }
-    h2{ margin:10px 0 5px }
-    p{ margin:3px 0; color:#777 }
-
-    /* ===== FIX ICONS ===== */
-.actions,
-.socials {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.actions a,
-.socials a {
-  width: 48px;
-  height: 48px;
-  background: #000;
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.actions i,
-.socials i {
-  font-size: 20px;
-}
-
-
-  </style>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
+
 <body>
 
-<div class="card">
-  <div id="cover" class="cover"></div>
-  <img id="avatar" class="avatar" />
+  <div class="card">
+    <div class="cover"></div>
 
-  <h2 id="name"></h2>
-  <p id="job"></p>
-  <p id="company"></p>
+    <img id="avatar" class="avatar" src="/justtap/assets/images/avatar.jpg" />
 
- <!-- Actions -->
-<div class="actions">
-  <a id="phone"><i class="fa-solid fa-phone"></i></a>
-  <a id="email"><i class="fa-solid fa-envelope"></i></a>
-</div>
+    <h2 id="name"></h2>
+    <p id="job"></p>
 
-<!-- Socials -->
-<div class="socials" id="socials"></div>
+    <div class="actions">
+      <a id="phone"><i class="fa-solid fa-phone"></i></a>
+      <a id="email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
 
+    <div id="socials" class="socials"></div>
+  </div>
 
-</div>
-
-<!-- Firebase -->
-<!-- Firebase App (core) -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-
-<!-- Firestore -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-<script src="firebase.js"></script>
-
-
+  <script src="/justtap/firebase.js"></script>
 </body>
 </html>
