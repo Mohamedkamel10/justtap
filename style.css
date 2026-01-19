@@ -1,23 +1,85 @@
-.socials {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 15px;
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-.socials a {
-  width: 42px;
-  height: 42px;
+body {
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 320px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  text-align: center;
+  overflow: hidden;
+  padding-bottom: 25px;
+}
+
+.cover {
+  height: 120px;
+  background: linear-gradient(135deg, #000, #444);
+}
+
+.avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin-top: -55px;
+  border: 5px solid #fff;
+  object-fit: cover;
+}
+
+h2 {
+  margin: 15px 0 5px;
+}
+
+p {
+  color: #777;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.actions a {
+  width: 45px;
+  height: 45px;
   background: #000;
   color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
   font-size: 18px;
+  text-decoration: none;
 }
 
-.socials a:hover {
-  background: #333;
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.socials a {
+  width: 45px;
+  height: 45px;
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  text-decoration: none;
 }
