@@ -1,6 +1,13 @@
-// ================= FIREBASE CONFIG =================
-var firebaseConfig = {
-  apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// 🔥 Firebase Config (حط بتاعك)
+const firebaseConfig = {
+   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
   projectId: "just-tap-4e85e",
   storageBucket: "just-tap-4e85e.firebasestorage.app",
@@ -8,86 +15,47 @@ var firebaseConfig = {
   appId: "1:497081794470:web:f14285e82562c2292d5967"
 };
 
-// ================= INIT FIREBASE =================
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// ================= GET USER FROM URL =================
-const params = new URLSearchParams(window.location.search);
-const username = params.get("user");
+// 🧠 USER ID
+const userId = "mohamed"; // نفس doc id في Firestore
 
-// ================= LOAD DATA =================
-window.onload = function () {
-  if (!username) {
-    console.error("No user in URL");
+async function loadUser() {
+  const ref = doc(db, "users", userId);
+  const snap = await getDoc(ref);
+
+  if (!snap.exists()) {
+    alert("User not found");
     return;
   }
 
-  db.collection("users").doc(username).get()
-    .then((doc) => {
-      if (!doc.exists) {
-        console.error("User not found");
-        return;
-      }
+  const data = snap.data();
 
-      const data = doc.data();
+  document.getElementById("name").textContent = data.name;
+  document.getElementById("job").textContent = data.job;
 
-      // ===== BASIC INFO =====
-      document.getElementById("name").innerText = data.name || "";
-      document.getElementById("job").innerText = data.job || "";
-      document.getElementById("company").innerText = data.company || "";
+  document.getElementById("phone").href = `tel:${data.phone}`;
+  document.getElementById("email").href = `mailto:${data.email}`;
 
-        // ---------- Images (Assets فقط) ----------
-      document.getElementById("avatar").src =
-        "assets/images/avatar.jpg";
+  const socialsDiv = document.getElementById("socials");
+  socialsDiv.innerHTML = "";
 
-      document.getElementById("cover").style.backgroundImage =
-        "url('assets/images/cover.jpg')";
-      // ===== ACTION BUTTONS =====
-      if (data.phone) {
-        const phone = document.getElementById("phone");
-        phone.href = "tel:" + data.phone;
-        phone.style.display = "flex";
-      }
+  for (const key in data.socials) {
+    const a = document.createElement("a");
+    a.href = data.socials[key];
+    a.target = "_blank";
 
-      if (data.email) {
-        const email = document.getElementById("email");
-        email.href = "mailto:" + data.email;
-        email.style.display = "flex";
-      }
+    let icon = "";
+    if (key === "facebook") icon = "fa-facebook-f";
+    if (key === "instagram") icon = "fa-instagram";
+    if (key === "whatsapp") icon = "fa-whatsapp";
+    if (key === "twitter") icon = "fa-x-twitter";
+    if (key === "snapchat") icon = "fa-snapchat";
 
-      const socials = document.getElementById("socials");
-socials.innerHTML = "";
-
-function addSocial(icon, link) {
-  const a = document.createElement("a");
-  a.href = link;
-  a.target = "_blank";
-
-  const i = document.createElement("i");
-  i.className = `fa-brands fa-${icon}`;
-
-  a.appendChild(i);
-  socials.appendChild(a);
+    a.innerHTML = `<i class="fa-brands ${icon}"></i>`;
+    socialsDiv.appendChild(a);
+  }
 }
 
-if (data.facebook) {
-  addSocial("facebook", data.facebook);
-}
-
-if (data.instagram) {
-  addSocial("instagram", data.instagram);
-}
-
-if (data.snapchat) {
-  addSocial("snapchat", data.snapchat);
-}
-      if (data.tiktok) {
-  addSocial("tiktok", data.tiktok);
-}
-
-    })
-    .catch((error) => {
-      console.error("Firestore error:", error);
-    });
-};
+loadUser();
