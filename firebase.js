@@ -38,16 +38,22 @@ window.onload = function () {
 
     // socials
     const socialsDiv = document.getElementById("socials");
-    socialsDiv.innerHTML = "";
+socialsDiv.innerHTML = "";
 
-    if (data.socials) {
-      Object.keys(data.socials).forEach((key) => {
-        const a = document.createElement("a");
-        a.href = data.socials[key];
-        a.target = "_blank";
-        a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
-        socialsDiv.appendChild(a);
-      });
-    }
+if (data.socials) {
+  Object.keys(data.socials).forEach((key) => {
+    const box = document.createElement("a");
+    box.className = "social-box";
+    box.href = data.socials[key];
+    box.target = "_blank";
+
+    box.innerHTML = `
+      <i class="fa-brands fa-${key}"></i>
+      <span>${key}</span>
+    `;
+
+    socialsDiv.appendChild(box);
+  });
+}
   });
 };
