@@ -1,58 +1,60 @@
-/* ===== CARD ===== */
-.card {
-  max-width: 380px;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 26px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.12);
-  overflow: hidden;
-}
-
-/* ===== SOCIAL GRID ===== */
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+/* ===== SOCIAL WRAPPER ===== */
+.social-wrapper {
   padding: 20px;
 }
 
+/* ===== GRID ===== */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* ===== BOX ===== */
 .social-box {
-  background: #f7f7f7;
-  border-radius: 18px;
-  padding: 16px 10px;
+  background: #f2f2f2;
+  border-radius: 22px;
+  padding: 18px 10px;
   text-align: center;
   text-decoration: none;
-  color: #000;
-  transition: all .35s ease;
-  box-shadow: 0 6px 14px rgba(0,0,0,.08);
+  transition: all .3s ease;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
 }
 
+/* ICON */
 .social-box i {
-  font-size: 34px;
-  margin-bottom: 6px;
+  font-size: 42px;
+  margin-bottom: 8px;
 }
 
+/* TEXT */
 .social-box span {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
+  color: #000;
   text-transform: capitalize;
 }
 
-/* Hover */
+/* HOVER */
 .social-box:hover {
-  transform: translateY(-4px) scale(1.05);
+  transform: translateY(-4px) scale(1.04);
   box-shadow: 0 14px 30px rgba(0,0,0,.18);
 }
 
-/* لو أيقونة واحدة */
+/* CLICK EFFECT */
+.social-box:active {
+  transform: scale(.96);
+}
+
+/* لو عنصر واحد */
 .social-grid a:last-child:nth-child(odd) {
   grid-column: span 2;
   width: 60%;
   margin: auto;
 }
 
-/* Brand colors */
+/* ===== BRAND COLORS ===== */
 .fa-whatsapp { color: #25D366; }
 .fa-facebook { color: #1877F2; }
 .fa-instagram { color: #E1306C; }
