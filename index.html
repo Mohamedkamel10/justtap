@@ -2,86 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>justtap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JustTap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Font Awesome (Icons) -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css">
 
-  <!-- Main Style -->
-  <link rel="stylesheet" href="style.css" />
-
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 </head>
 <body>
 
-  <div class="container">
-    <div class="card">
+  <div class="card">
+    <div class="cover"></div>
 
-      <!-- Cover -->
-      <div class="cover">
-        <img id="coverImg" src="justtap/assets/images/cover.jpg" alt="cover">
-      </div>
+    <img id="avatar" class="avatar" src="./assets/images/avatar.jpg" />
 
-      <!-- Avatar -->
-      <div class="avatar">
-        <img id="avatarImg" src="justtap/assets/images/avatar.jpg" alt="avatar">
-      </div>
+    <h2 id="name">Loading...</h2>
+    <p id="job">Loading...</p>
 
-      <!-- Info -->
-      <h2 id="name">Loading...</h2>
-      <p id="job">Loading...</p>
-      <span id="company"></span>
-
-      <!-- Contact Icons -->
-      <div class="contact-icons">
-        <a id="emailLink" class="circle-btn">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
-        <a id="phoneLink" class="circle-btn">
-          <i class="fa-solid fa-phone"></i>
-        </a>
-      </div>
-
-      <!-- Social Box -->
-      <div class="social-box">
-
-        <div class="social-row">
-          <a id="whatsapp" class="social-item">
-            <i class="fa-brands fa-whatsapp whatsapp"></i>
-            <span>WhatsApp</span>
-          </a>
-
-          <a id="facebook" class="social-item">
-            <i class="fa-brands fa-facebook facebook"></i>
-            <span>Facebook</span>
-          </a>
-        </div>
-
-        <div class="social-row">
-          <a id="instagram" class="social-item">
-            <i class="fa-brands fa-instagram instagram"></i>
-            <span>Instagram</span>
-          </a>
-
-          <a id="tiktok" class="social-item">
-            <i class="fa-brands fa-tiktok tiktok"></i>
-            <span>TikTok</span>
-          </a>
-        </div>
-
-        <div class="social-row center">
-          <a id="snapchat" class="social-item">
-            <i class="fa-brands fa-snapchat snapchat"></i>
-            <span>Snapchat</span>
-          </a>
-        </div>
-
-      </div>
+    <div class="actions">
+      <a id="phoneBtn" href="#"><i class="fa-solid fa-phone"></i></a>
+      <a id="emailBtn" href="#"><i class="fa-solid fa-envelope"></i></a>
     </div>
+
+    <div class="socials" id="socials"></div>
   </div>
 
   <!-- Firebase Logic -->
-  <script type="module" src="firebase.js"></script>
+  <script type="module" src="./firebase.js"></script>
 </body>
 </html>
