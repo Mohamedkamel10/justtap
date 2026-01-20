@@ -7,39 +7,39 @@
 .social-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 18px;
 }
 
-/* ===== BOX ===== */
+/* ===== SOCIAL BOX ===== */
 .social-box {
-  background: #f2f2f2;
-  border-radius: 22px;
-  padding: 18px 10px;
+  background: #f3f3f3;
+  border-radius: 26px;
+  padding: 22px 10px;
   text-align: center;
   text-decoration: none;
-  transition: all .3s ease;
-  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+  transition: all .35s ease;
 }
 
 /* ICON */
 .social-box i {
-  font-size: 42px;
-  margin-bottom: 8px;
+  font-size: 48px;
+  margin-bottom: 10px;
 }
 
 /* TEXT */
 .social-box span {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #000;
   text-transform: capitalize;
 }
 
-/* HOVER */
+/* HOVER ANIMATION */
 .social-box:hover {
-  transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 14px 30px rgba(0,0,0,.18);
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,.18);
 }
 
 /* CLICK EFFECT */
@@ -47,10 +47,10 @@
   transform: scale(.96);
 }
 
-/* لو عنصر واحد */
+/* لو أيقونة واحدة */
 .social-grid a:last-child:nth-child(odd) {
   grid-column: span 2;
-  width: 60%;
+  width: 65%;
   margin: auto;
 }
 
