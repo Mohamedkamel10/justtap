@@ -5,41 +5,83 @@
   <title>justtap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ✅ Font Awesome (سبب اختفاء الايكونات) -->
-  <link
-    rel="stylesheet"
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  />
+  <!-- Font Awesome (Icons) -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <!-- ✅ CSS -->
-  <link rel="stylesheet" href="/justtap/style.css" />
+  <!-- Main Style -->
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
-
 <body>
 
-  <div class="card">
-    <div class="cover"></div>
+  <div class="container">
+    <div class="card">
 
-    <img id="avatar" class="avatar" src="/justtap/assets/images/avatar.jpg" />
+      <!-- Cover -->
+      <div class="cover">
+        <img id="coverImg" src="justtap/assets/images/cover.jpg" alt="cover">
+      </div>
 
-    <h2 id="name"></h2>
-    <p id="job"></p>
+      <!-- Avatar -->
+      <div class="avatar">
+        <img id="avatarImg" src="justtap/assets/images/avatar.jpg" alt="avatar">
+      </div>
 
-    <div class="actions box">
-  <a id="phone" class="icon phone"><i class="fa-solid fa-phone"></i></a>
-  <a id="email" class="icon mail"><i class="fa-solid fa-envelope"></i></a>
-</div>
+      <!-- Info -->
+      <h2 id="name">Loading...</h2>
+      <p id="job">Loading...</p>
+      <span id="company"></span>
 
-<div class="social-box">
-  <div id="socialRow" class="social-row"></div>
-</div>
+      <!-- Contact Icons -->
+      <div class="contact-icons">
+        <a id="emailLink" class="circle-btn">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a id="phoneLink" class="circle-btn">
+          <i class="fa-solid fa-phone"></i>
+        </a>
+      </div>
 
+      <!-- Social Box -->
+      <div class="social-box">
+
+        <div class="social-row">
+          <a id="whatsapp" class="social-item">
+            <i class="fa-brands fa-whatsapp whatsapp"></i>
+            <span>WhatsApp</span>
+          </a>
+
+          <a id="facebook" class="social-item">
+            <i class="fa-brands fa-facebook facebook"></i>
+            <span>Facebook</span>
+          </a>
+        </div>
+
+        <div class="social-row">
+          <a id="instagram" class="social-item">
+            <i class="fa-brands fa-instagram instagram"></i>
+            <span>Instagram</span>
+          </a>
+
+          <a id="tiktok" class="social-item">
+            <i class="fa-brands fa-tiktok tiktok"></i>
+            <span>TikTok</span>
+          </a>
+        </div>
+
+        <div class="social-row center">
+          <a id="snapchat" class="social-item">
+            <i class="fa-brands fa-snapchat snapchat"></i>
+            <span>Snapchat</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-  <script src="/justtap/firebase.js"></script>
+  <!-- Firebase Logic -->
+  <script type="module" src="firebase.js"></script>
 </body>
 </html>
