@@ -1,62 +1,46 @@
-/* ===== SOCIAL WRAPPER ===== */
-.social-wrapper {
+.social-container {
   padding: 20px;
 }
 
-/* ===== GRID ===== */
 .social-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  gap: 20px;
+  background: #f2f2f2;
+  padding: 25px;
+  border-radius: 20px;
 }
 
-/* ===== SOCIAL BOX ===== */
-.social-box {
-  background: #f3f3f3;
-  border-radius: 26px;
+.social-card {
+  background: #fff;
+  border-radius: 22px;
   padding: 22px 10px;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 10px 25px rgba(0,0,0,.08);
-  transition: all .35s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
 }
 
-/* ICON */
-.social-box i {
-  font-size: 48px;
+.social-card i {
+  font-size: 46px;
   margin-bottom: 10px;
 }
 
-/* TEXT */
-.social-box span {
+.social-card span {
   display: block;
   font-size: 15px;
   font-weight: 500;
   color: #000;
-  text-transform: capitalize;
-}
-
-/* HOVER ANIMATION */
-.social-box:hover {
-  transform: translateY(-6px) scale(1.05);
-  box-shadow: 0 20px 40px rgba(0,0,0,.18);
-}
-
-/* CLICK EFFECT */
-.social-box:active {
-  transform: scale(.96);
 }
 
 /* لو أيقونة واحدة */
-.social-grid a:last-child:nth-child(odd) {
+.social-card.center {
   grid-column: span 2;
   width: 65%;
   margin: auto;
 }
 
-/* ===== BRAND COLORS ===== */
+/* ألوان */
 .fa-whatsapp { color: #25D366; }
 .fa-facebook { color: #1877F2; }
 .fa-instagram { color: #E1306C; }
 .fa-tiktok { color: #000; }
-.fa-snapchat { color: #FFFC00; }
