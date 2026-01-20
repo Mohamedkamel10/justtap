@@ -42,18 +42,19 @@ socialsDiv.innerHTML = "";
 
 if (data.socials) {
   Object.keys(data.socials).forEach((key) => {
-    const a = document.createElement("a");
-    a.className = "social-box";
-    a.href = data.socials[key];
-    a.target = "_blank";
+    const link = document.createElement("a");
+    link.className = "social-box";
+    link.href = data.socials[key];
+    link.target = "_blank";
 
-    a.innerHTML = `
+    link.innerHTML = `
       <i class="fa-brands fa-${key}"></i>
       <span>${key}</span>
     `;
 
-    socialsDiv.appendChild(a);
+    socialsDiv.appendChild(link);
   });
 }
+
   });
 };
