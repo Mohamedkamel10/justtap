@@ -27,13 +27,16 @@ db.collection("users").doc(userId).get().then(doc=>{
 
   const d = doc.data();
 
-  document.getElementById("cover").style.backgroundImage =
-    `url(${d.cover})`;
+   document.getElementById("name").innerText = d.name || "";
+      document.getElementById("job").innerText = d.job || "";
+      document.getElementById("company").innerText = d.company || "";
 
-  document.getElementById("avatar").src = d.avatar;
-  document.getElementById("name").innerText = d.name;
-  document.getElementById("job").innerText = d.job;
-  document.getElementById("company").innerText = d.company;
+      // ---------- Images (Assets فقط) ----------
+      document.getElementById("avatar").src =
+        "assets/images/avatar.jpg";
+
+      document.getElementById("cover").style.backgroundImage =
+        "url('assets/images/cover.jpg')";
 
   document.getElementById("call").href = `tel:${d.phone}`;
   document.getElementById("mail").href = `mailto:${d.email}`;
