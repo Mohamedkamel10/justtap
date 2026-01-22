@@ -1,85 +1,128 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   background: #f2f2f2;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
+/* ===== MAIN CARD ===== */
 .card {
-  width: 320px;
+  width: 100%;
+  max-width: 420px;   /* 👈 ده المهم */
   background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  text-align: center;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.15);
   overflow: hidden;
-  padding-bottom: 25px;
 }
 
+/* ===== COVER ===== */
 .cover {
-  height: 120px;
-  background: linear-gradient(135deg, #000, #444);
+  height: 220px;
+  background-size: cover;
+  background-position: center;
 }
 
+/* ===== AVATAR ===== */
 .avatar {
-  width: 110px;
-  height: 110px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  margin-top: -55px;
-  border: 5px solid #fff;
+  border: 6px solid #fff;
+  margin: -70px auto 0;
+  display: block;
   object-fit: cover;
 }
 
+/* ===== TEXT ===== */
 h2 {
   margin: 15px 0 5px;
+  font-size: 22px;
 }
 
-p {
-  color: #777;
-  margin: 0;
+.job {
+  font-size: 15px;
+  color: #666;
 }
 
+.company {
+  font-size: 14px;
+  color: #999;
+}
+
+/* ===== ACTIONS ===== */
 .actions {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   margin: 20px 0;
 }
 
 .actions a {
-  width: 45px;
-  height: 45px;
-  background: #000;
-  color: #fff;
+  width: 65px;
+  height: 65px;
+  background: #f3f3f3;
   border-radius: 50%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 18px;
+  align-items: center;
+  font-size: 24px;
+  color: #000;
   text-decoration: none;
+  transition: 0.2s;
 }
 
-.socials {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+.actions a:hover {
+  background: #000;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* ===== SOCIAL BOX ===== */
+.social-box {
+  background: #f4f4f4;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ===== SOCIAL ITEM ===== */
+.social-item {
+  background: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+  transition: 0.2s;
+}
+
+.social-item:hover {
+  transform: scale(1.05);
+}
+
+.social-item i {
+  font-size: 42px;
+}
+
+.social-item p {
   margin-top: 10px;
+  font-size: 14px;
+  color: #333;
 }
 
-.socials a {
-  width: 45px;
-  height: 45px;
-  background: #000;
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  text-decoration: none;
+/* ===== CENTER SINGLE ICON ===== */
+.social-item.center {
+  grid-column: span 2;
+  width: 55%;
+  margin: auto;
 }
