@@ -41,21 +41,19 @@ async function loadUser() {
   const socialsDiv = document.getElementById("socials");
   socialsDiv.innerHTML = "";
 
-  for (const key in data.socials) {
-    const a = document.createElement("a");
-    a.href = data.socials[key];
-    a.target = "_blank";
+  const icons = {
+  whatsapp: "fa-whatsapp",
+  facebook: "fa-facebook-f",
+  instagram: "fa-instagram",
+  tiktok: "fa-tiktok",
+  snapchat: "fa-snapchat"
+};
 
-    let icon = "";
-    if (key === "facebook") icon = "fa-facebook-f";
-    if (key === "instagram") icon = "fa-instagram";
-    if (key === "whatsapp") icon = "fa-whatsapp";
-    if (key === "twitter") icon = "fa-x-twitter";
-    if (key === "snapchat") icon = "fa-snapchat";
-
-    a.innerHTML = `<i class="fa-brands ${icon}"></i>`;
-    socialsDiv.appendChild(a);
-  }
+div.innerHTML = `
+  <a href="${socials[key]}" target="_blank" style="color:inherit;text-decoration:none">
+    <i class="fa-brands ${icons[key]}"></i>
+    <p>${key}</p>
+  </a>
 }
 
 loadUser();
