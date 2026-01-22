@@ -4,180 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Profile Card</title>
+<title>JustTap</title>
 
-<!-- FontAwesome -->
+<link rel="stylesheet" href="css/style.css">
+
 <link rel="stylesheet"
- href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<style>
-*{box-sizing:border-box;font-family:Arial}
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#f2f2f2;
-}
-
-/* CARD */
-.card{
-  width:100%;
-  max-width:420px;
-  background:#fff;
-  border-radius:25px;
-  overflow:hidden;
-  box-shadow:0 20px 45px rgba(0,0,0,.2);
-}
-
-/* COVER */
-.cover{
-  height:240px;
-  background-size:cover;
-  background-position:center;
-}
-
-/* AVATAR */
-.avatar{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  border:6px solid #fff;
-  margin:-75px auto 0;
-  display:block;
-  object-fit:cover;
-}
-
-/* TEXT */
-.info{
-  text-align:center;
-  padding:15px;
-}
-.info h2{margin:10px 0 5px}
-.info p{margin:4px 0;color:#666}
-
-/* CALL + MAIL */
-.actions{
-  display:flex;
-  justify-content:center;
-  gap:25px;
-  margin:20px 0;
-}
-.actions a{
-  width:65px;height:65px;
-  background:#eee;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:26px;
-  color:#000;
-  text-decoration:none;
-}
-
-/* SOCIAL */
-.social{
-  background:#f4f4f4;
-  margin:20px;
-  padding:20px;
-  border-radius:20px;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:20px;
-}
-.social div{
-  background:#fff;
-  border-radius:18px;
-  padding:15px;
-  text-align:center;
-}
-.social i{font-size:42px}
-.social p{margin:8px 0 0;font-size:14px}
-.center{
-  grid-column:span 2;
-  width:55%;
-  margin:auto;
-}
-
-/* MOBILE PERFECT */
-@media(max-width:480px){
-  body{padding:15px}
-}
-</style>
 </head>
 
 <body>
 
 <div class="card">
-  <div class="cover" id="cover"></div>
-
+  <div id="cover" class="cover"></div>
   <img id="avatar" class="avatar">
 
-  <div class="info">
-    <h2 id="name"></h2>
-    <p id="job"></p>
-    <p id="company"></p>
-  </div>
+  <h2 id="name"></h2>
+  <p id="job"></p>
+  <p id="company"></p>
 
   <div class="actions">
-    <a id="call"><i class="fa-solid fa-phone"></i></a>
-    <a id="mail"><i class="fa-solid fa-envelope"></i></a>
+    <a id="phone"><i class="fa-solid fa-phone"></i></a>
+    <a id="email"><i class="fa-solid fa-envelope"></i></a>
   </div>
 
-  <div class="social" id="socials"></div>
+  <div id="socials" class="socials"></div>
 </div>
 
-<script>
-const firebaseConfig = {
-  apiKey: "PUT_API_KEY",
-  authDomain: "PUT_DOMAIN",
-  projectId: "PUT_PROJECT_ID"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-const user = new URLSearchParams(location.search).get("user");
-
-db.collection("users").doc(user).get().then(doc=>{
-  const d = doc.data();
-
-  cover.style.backgroundImage = `url(${d.cover})`;
-  avatar.src = d.avatar;
-  name.innerText = d.name;
-  job.innerText = d.job;
-  company.innerText = d.company;
-
-  call.href = `tel:${d.phone}`;
-  mail.href = `mailto:${d.email}`;
-
-  const icons = {
-    whatsapp:"fa-whatsapp",
-    facebook:"fa-facebook-f",
-    instagram:"fa-instagram",
-    tiktok:"fa-tiktok",
-    snapchat:"fa-snapchat"
-  };
-
-  socials.innerHTML="";
-  for(let k in icons){
-    if(!d[k]) continue;
-    const div=document.createElement("div");
-    if(k==="tiktok") div.classList.add("center");
-    div.innerHTML=`
-      <a href="${d[k]}" target="_blank" style="text-decoration:none;color:inherit">
-        <i class="fa-brands ${icons[k]}"></i>
-        <p>${k}</p>
-      </a>`;
-    socials.appendChild(div);
-  }
-});
-</script>
-
+<script src="js/firebase.js"></script>
 </body>
 </html>
