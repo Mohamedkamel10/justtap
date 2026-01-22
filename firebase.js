@@ -1,64 +1,53 @@
-/* ===== FIREBASE CONFIG ===== */
 const firebaseConfig = {
- apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
+  apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
-  projectId: "just-tap-4e85e",
+  projectId: "just-tap-4e85e"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-/* ===== GET USER FROM URL ===== */
-const params = new URLSearchParams(window.location.search);
-const userId = params.get("user");
+const user = new URLSearchParams(location.search).get("user");
 
-/* ===== ICONS MAP ===== */
-const icons = {
-  whatsapp:"fa-whatsapp",
-  facebook:"fa-facebook-f",
-  instagram:"fa-instagram",
-  tiktok:"fa-tiktok",
-  snapchat:"fa-snapchat"
-};
-
-/* ===== LOAD DATA ===== */
-db.collection("users").doc(userId).get().then(doc=>{
+db.collection("users").doc(user).get().then(doc=>{
   if(!doc.exists) return;
 
   const d = doc.data();
 
-   document.getElementById("name").innerText = d.name || "";
-      document.getElementById("job").innerText = d.job || "";
-      document.getElementById("company").innerText = d.company || "";
+  document.getElementById("name").innerText = d.name || "";
+  document.getElementById("job").innerText = d.job || "";
+  document.getElementById("company").innerText = d.company || "";
 
-      // ---------- Images (Assets فقط) ----------
-      document.getElementById("avatar").src =
-        "assets/images/avatar.jpg";
+  document.getElementById("avatar").src =
+    d.avatar || "assets/images/avatar.jpg";
 
-      document.getElementById("cover").style.backgroundImage =
-        "url('assets/images/cover.jpg')";
+  document.getElementById("cover").style.backgroundImage =
+    `url(${d.cover || "assets/images/cover.jpg"})`;
 
-  document.getElementById("call").href = `tel:${d.phone}`;
-  document.getElementById("mail").href = `mailto:${d.email}`;
+  document.getElementById("phone").href = `tel:${d.phone}`;
+  document.getElementById("email").href = `mailto:${d.email}`;
 
   const socials = document.getElementById("socials");
   socials.innerHTML = "";
 
-  Object.keys(icons).forEach(key=>{
-    if(!d[key]) return;
+  const icons = {
+    whatsapp:"fa-whatsapp",
+    facebook:"fa-facebook-f",
+    instagram:"fa-instagram",
+    tiktok:"fa-tiktok",
+    snapchat:"fa-snapchat"
+  };
 
-    const div = document.createElement("div");
-    div.className = "social-item";
+  for(let k in icons){
+    if(!d[k]) continue;
 
-    if(key === "tiktok") div.classList.add("center");
+    const a = document.createElement("a");
+    a.href = d[k];
+    a.target="_blank";
+    a.innerHTML = `<i class="fa-brands ${icons[k]}"></i>`;
 
-    div.innerHTML = `
-      <a href="${d[key]}" target="_blank"
-         style="text-decoration:none;color:inherit">
-        <i class="fa-brands ${icons[key]}"></i>
-        <p>${key}</p>
-      </a>
-    `;
-    socials.appendChild(div);
-  });
+    if(k==="tiktok") a.classList.add("center");
+
+    socials.appendChild(a);
+  }
 });
