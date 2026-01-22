@@ -1,7 +1,4 @@
-*{
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+*{box-sizing:border-box;font-family:Arial}
 
 body{
   margin:0;
@@ -12,56 +9,31 @@ body{
   align-items:center;
 }
 
-/* ===== CARD ===== */
 .card{
   width:100%;
   max-width:420px;
   background:#fff;
   border-radius:25px;
   overflow:hidden;
-  box-shadow:0 20px 45px rgba(0,0,0,.18);
+  box-shadow:0 20px 40px rgba(0,0,0,.2);
+  text-align:center;
 }
 
-/* ===== COVER ===== */
 .cover{
-  height:230px;
+  height:240px;
   background-size:cover;
   background-position:center;
 }
 
-/* ===== AVATAR ===== */
 .avatar{
-  width:140px;
-  height:140px;
+  width:150px;
+  height:150px;
   border-radius:50%;
   border:6px solid #fff;
-  margin:-75px auto 0;
-  display:block;
+  margin-top:-75px;
   object-fit:cover;
 }
 
-/* ===== TEXT ===== */
-.text{
-  text-align:center;
-  padding:10px 20px;
-}
-
-.text h2{
-  margin:10px 0 5px;
-  font-size:24px;
-}
-
-.job{
-  font-size:15px;
-  color:#666;
-}
-
-.company{
-  font-size:14px;
-  color:#999;
-}
-
-/* ===== CALL & MAIL ===== */
 .actions{
   display:flex;
   justify-content:center;
@@ -72,25 +44,16 @@ body{
 .actions a{
   width:65px;
   height:65px;
-  background:#f3f3f3;
+  background:#eee;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:24px;
+  font-size:26px;
   color:#000;
-  text-decoration:none;
-  transition:.25s;
 }
 
-.actions a:hover{
-  background:#000;
-  color:#fff;
-  transform:scale(1.1);
-}
-
-/* ===== SOCIAL ===== */
-.social-box{
+.socials{
   background:#f4f4f4;
   margin:20px;
   padding:20px;
@@ -100,29 +63,16 @@ body{
   gap:20px;
 }
 
-.social-item{
+.socials a{
   background:#fff;
   border-radius:18px;
   padding:15px;
-  text-align:center;
-  box-shadow:0 6px 15px rgba(0,0,0,.1);
-  transition:.25s;
+  font-size:38px;
+  color:#000;
+  text-decoration:none;
 }
 
-.social-item:hover{
-  transform:scale(1.05);
-}
-
-.social-item i{
-  font-size:42px;
-}
-
-.social-item p{
-  margin:10px 0 0;
-  font-size:14px;
-}
-
-.social-item.center{
+.center{
   grid-column:span 2;
   width:55%;
   margin:auto;
