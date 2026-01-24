@@ -4,123 +4,118 @@
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  background: #f2f2f2;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
   display: flex;
   justify-content: center;
+  padding: 40px 15px;
 }
 
-/* ===== CARD ===== */
+/* الكارت */
 .card {
   width: 100%;
-  max-width: 520px;     /* نفس إحساس الصورة */
+  max-width: 420px;   /* ← ده سر الحجم الصح */
   background: #fff;
-  border-radius: 28px;
-  margin: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   overflow: hidden;
 }
 
-/* ===== COVER ===== */
+/* صورة الغلاف */
 .cover {
-  height: 220px;
+  height: 180px;
   background: url("/justtap/assets/images/cover.jpg") center/cover no-repeat;
 }
 
-/* ===== AVATAR ===== */
+/* الأفتار */
 .avatar {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   border: 6px solid #fff;
-  margin: -70px auto 12px;
-  display: block;
+  margin-top: -60px;
+  object-fit: cover;
 }
 
-/* ===== TEXT ===== */
+/* الاسم */
 h2 {
-  text-align: center;
-  margin: 8px 0 4px;
-  font-size: 26px;
-  font-weight: 700;
+  margin: 15px 0 5px;
+  font-size: 24px;
 }
 
+/* الوظيفة */
 p {
-  text-align: center;
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   color: #777;
   font-size: 15px;
 }
 
-/* ===== PHONE + EMAIL ===== */
+/* أزرار الاتصال */
 .actions {
   display: flex;
   justify-content: center;
-  gap: 22px;
-  margin-bottom: 28px;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
 .actions a {
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   background: #000;
   color: #fff;
   border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 24px;
+  justify-content: center;
+  font-size: 22px;
   text-decoration: none;
 }
 
-/* ===== SOCIAL CONTAINER ===== */
+/* كونتينر السوشيال */
 .socials {
-  background: #f6f6f6;
-  margin: 0 20px 24px;
-  padding: 22px;
-  border-radius: 26px;
-
+  background: #f2f2f2;
+  margin: 0 20px 20px;
+  padding: 20px;
+  border-radius: 18px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 15px;
 }
 
-/* ===== SOCIAL ITEM ===== */
+/* أيقونة سوشيال */
 .socials a {
   background: #fff;
-  height: 76px;
-  border-radius: 18px;
-
+  height: 75px;
+  border-radius: 16px;
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  font-size: 34px;
+  justify-content: center;
+  font-size: 30px;
+  color: #000;
   text-decoration: none;
-
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-/* ألوان الأيقونات */
-.fa-whatsapp { color: #25D366; }
-.fa-facebook-f { color: #1877F2; }
-.fa-instagram { color: #E1306C; }
-.fa-snapchat { color: #FFFC00; }
-.fa-tiktok { color: #000; }
-
-/* لو أيقونة واحدة */
+/* لو عنصر واحد */
 .socials a.single {
   grid-column: span 2;
+  justify-self: center;
+  width: 50%;
 }
 
-/* ===== DESKTOP ===== */
-@media (min-width: 900px) {
-  body {
-    align-items: center;
-    height: 100vh;
+/* موبايل */
+@media (max-width: 480px) {
+  .cover {
+    height: 160px;
   }
 
-  .card {
-    max-width: 560px;
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .socials a.single {
+    width: 100%;
   }
 }
