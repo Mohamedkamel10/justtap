@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>JustTap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>JustTap</title>
+  <!-- ✅ Font Awesome (سبب اختفاء الايكونات) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
 
-<link rel="stylesheet" href="css/style.css">
+  <!-- ✅ CSS -->
+  <link rel="stylesheet" href="/justtap/style.css" />
 
-<link rel="stylesheet"
- href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 
 <body>
 
-<div class="card">
-  <div id="cover" class="cover"></div>
-  <img id="avatar" class="avatar">
+  <div class="card">
+    <div class="cover"></div>
 
-  <h2 id="name"></h2>
-  <p id="job"></p>
-  <p id="company"></p>
+    <img id="avatar" class="avatar" src="/justtap/assets/images/avatar.jpg" />
 
-  <div class="actions">
-    <a id="phone"><i class="fa-solid fa-phone"></i></a>
-    <a id="email"><i class="fa-solid fa-envelope"></i></a>
+    <h2 id="name"></h2>
+    <p id="job"></p>
+
+    <div class="actions">
+      <a id="phone"><i class="fa-solid fa-phone"></i></a>
+      <a id="email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+
+    <div id="socials" class="socials"></div>
   </div>
 
-  <div id="socials" class="socials"></div>
-</div>
-
-<script src="js/firebase.js"></script>
+  <script src="/justtap/firebase.js"></script>
 </body>
 </html>
