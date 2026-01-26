@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, sans-serif;
@@ -9,27 +10,26 @@ body {
 
   display: flex;
   justify-content: center;
-  align-items: flex-start;   /* 🔥 مهم */
-  padding-top: 20px;         /* 🔥 مهم */
+  align-items: flex-start;
+  padding: 20px 0;
 }
 
 /* ===== CARD ===== */
 .card {
   width: 100%;
   max-width: 520px;
-  background: #fff;
+  background: #ffffff;
   border-radius: 28px;
-  margin: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  margin: 0 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  padding-bottom: 24px;   /* 🔥 */
+  padding-bottom: 24px;
 }
-
 
 /* ===== COVER ===== */
 .cover {
   height: 220px;
-  background: url("/justtap/assets/images/cover.jpg") center/cover no-repeat;
+  background: url("/justtap/assets/images/cover.jpg") center / cover no-repeat;
 }
 
 /* ===== AVATAR ===== */
@@ -37,16 +37,30 @@ body {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  border: 6px solid #fff;
-  margin: -70px auto 20px;
+  border: 6px solid #ffffff;
+  margin: -70px auto 18px;
   display: block;
   position: relative;
-  z-index: 2;   /* 🔥 يمنع التغطية */
+  z-index: 2;
+  background: #fff;
 }
 
-
 /* ===== TEXT ===== */
-h2, p {
+h2 {
+  text-align: center;
+  margin: 8px 0 4px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #111;
+  position: relative;
+  z-index: 2;
+}
+
+p {
+  text-align: center;
+  margin: 0 0 22px;
+  color: #777;
+  font-size: 15px;
   position: relative;
   z-index: 2;
 }
@@ -70,6 +84,12 @@ h2, p {
   align-items: center;
   font-size: 24px;
   text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.actions a:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* ===== SOCIAL CONTAINER ===== */
@@ -86,7 +106,7 @@ h2, p {
 
 /* ===== SOCIAL ITEM ===== */
 .socials a {
-  background: #fff;
+  background: #ffffff;
   height: 76px;
   border-radius: 18px;
 
@@ -97,19 +117,51 @@ h2, p {
   font-size: 34px;
   text-decoration: none;
 
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ألوان الأيقونات */
+.socials a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== ICON COLORS ===== */
 .fa-whatsapp { color: #25D366; }
+.fa-facebook,
 .fa-facebook-f { color: #1877F2; }
 .fa-instagram { color: #E1306C; }
 .fa-snapchat { color: #FFFC00; }
-.fa-tiktok { color: #000; }
+.fa-tiktok { color: #000000; }
+.fa-twitter { color: #1DA1F2; }
+.fa-linkedin { color: #0A66C2; }
 
-/* لو أيقونة واحدة */
+/* ===== لو أيقونة واحدة ===== */
 .socials a.single {
   grid-column: span 2;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+  h2 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+  }
+
+  .actions a {
+    width: 54px;
+    height: 54px;
+    font-size: 22px;
+  }
 }
 
 /* ===== DESKTOP ===== */
@@ -122,18 +174,4 @@ h2, p {
   .card {
     max-width: 560px;
   }
-  @media (max-width: 480px) {
-  .socials {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-
-  p {
-    font-size: 14px;
-  }
-}
-
 }
