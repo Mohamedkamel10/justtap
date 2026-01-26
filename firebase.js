@@ -1,53 +1,59 @@
-// Firebase config
-var firebaseConfig = {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* Firebase Config */
+const firebaseConfig = {
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
-  projectId: "just-tap-4e85e"
+  projectId: "just-tap-4e85e",
 };
 
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// get username from url
-const params = new URLSearchParams(window.location.search);
-const username = params.get("user");
+/* Load User Data */
+async function loadUser() {
+  const userRef = doc(db, "users", "mohamed");
+  const snap = await getDoc(userRef);
 
-if (!username) {
-  console.error("No user found in URL");
+  if (!snap.exists()) return;
+
+  const user = snap.data();
+
+  // text data
+  document.getElementById("name").innerText = user.name;
+  document.getElementById("job").innerText = user.job;
+  document.getElementById("company").innerText = user.company;
+
+  // social links
+  document.getElementById("facebook").onclick = () =>
+    openLink(user.facebook);
+
+  document.getElementById("instagram").onclick = () =>
+    openLink(user.instagram);
+
+  document.getElementById("tiktok").onclick = () =>
+    openLink(user.tiktok);
+
+  document.getElementById("snapchat").onclick = () =>
+    openLink(user.snapchat);
+
+  // phone & email
+  document.getElementById("phone").onclick = () =>
+    openLink(`tel:${user.phone}`);
+
+  document.getElementById("email").onclick = () =>
+    openLink(`mailto:${user.email}`);
 }
 
-window.onload = function () {
-  db.collection("users").doc(username).get().then((doc) => {
-    if (!doc.exists) {
-      console.error("User not found");
-      return;
-    }
+/* Open link safely */
+function openLink(url) {
+  if (!url) return;
+  window.open(url, "_blank");
+}
 
-    const data = doc.data();
-
-    document.getElementById("name").innerText = data.name || "";
-    document.getElementById("job").innerText = data.job || "";
-
-    if (data.phone) {
-      document.getElementById("phone").href = `tel:${data.phone}`;
-    }
-
-    if (data.email) {
-      document.getElementById("email").href = `mailto:${data.email}`;
-    }
-
-    // socials
-    const socialsDiv = document.getElementById("socials");
-    socialsDiv.innerHTML = "";
-
-    if (data.socials) {
-      Object.keys(data.socials).forEach((key) => {
-        const a = document.createElement("a");
-        a.href = data.socials[key];
-        a.target = "_blank";
-        a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
-        socialsDiv.appendChild(a);
-      });
-    }
-  });
-};
+loadUser();
