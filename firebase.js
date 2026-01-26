@@ -1,59 +1,65 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getFirestore,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-/* Firebase Config */
-const firebaseConfig = {
+// Firebase
+var firebaseConfig = {
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
-  projectId: "just-tap-4e85e",
+  projectId: "just-tap-4e85e"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
 
-/* Load User Data */
-async function loadUser() {
-  const userRef = doc(db, "users", "mohamed");
-  const snap = await getDoc(userRef);
+// get username from url
+const params = new URLSearchParams(window.location.search);
+const username = params.get("user");
 
-  if (!snap.exists()) return;
-
-  const user = snap.data();
-
-  // text data
-  document.getElementById("name").innerText = user.name;
-  document.getElementById("job").innerText = user.job;
-  document.getElementById("company").innerText = user.company;
-
-  // social links
-  document.getElementById("facebook").onclick = () =>
-    openLink(user.facebook);
-
-  document.getElementById("instagram").onclick = () =>
-    openLink(user.instagram);
-
-  document.getElementById("tiktok").onclick = () =>
-    openLink(user.tiktok);
-
-  document.getElementById("snapchat").onclick = () =>
-    openLink(user.snapchat);
-
-  // phone & email
-  document.getElementById("phone").onclick = () =>
-    openLink(`tel:${user.phone}`);
-
-  document.getElementById("email").onclick = () =>
-    openLink(`mailto:${user.email}`);
+if (!username) {
+  alert("No user in URL");
 }
 
-/* Open link safely */
-function openLink(url) {
-  if (!url) return;
-  window.open(url, "_blank");
+// helpers
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el && value) el.innerText = value;
 }
 
-loadUser();
+function setLink(id, link) {
+  const el = document.getElementById(id);
+  if (el && link) el.href = link;
+}
+
+window.onload = () => {
+  db.collection("users").doc(username).get().then(doc => {
+    if (!doc.exists) return;
+
+    const data = doc.data();
+
+    setText("name", data.name);
+    setText("job", data.job);
+    setText("company", data.company);
+
+    setLink("phone", data.phone ? `tel:${data.phone}` : "");
+    setLink("email", data.email ? `mailto:${data.email}` : "");
+
+    // socials
+    const socials = document.getElementById("socials");
+    socials.innerHTML = "";
+
+    const icons = {
+      whatsapp: "fa-whatsapp",
+      facebook: "fa-facebook-f",
+      instagram: "fa-instagram",
+      tiktok: "fa-tiktok",
+      snapchat: "fa-snapchat"
+    };
+
+    Object.keys(icons).forEach(key => {
+      if (data[key]) {
+        socials.innerHTML += `
+          <a href="${data[key]}" target="_blank">
+            <i class="fa-brands ${icons[key]}"></i>
+          </a>
+        `;
+      }
+    });
+  });
+};
