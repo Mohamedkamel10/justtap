@@ -40,26 +40,25 @@ window.onload = () => {
     setLink("phone", data.phone ? `tel:${data.phone}` : "");
     setLink("email", data.email ? `mailto:${data.email}` : "");
 
-    // socials
-    const socials = document.getElementById("socials");
-    socials.innerHTML = "";
+    const socialsDiv = document.getElementById("socials");
+socialsDiv.innerHTML = "";
 
-    const icons = {
-      whatsapp: "fa-whatsapp",
-      facebook: "fa-facebook-f",
-      instagram: "fa-instagram",
-      tiktok: "fa-tiktok",
-      snapchat: "fa-snapchat"
-    };
+const socialMap = {
+  facebook: "fa-facebook-f",
+  instagram: "fa-instagram",
+  whatsapp: "fa-whatsapp",
+  snapchat: "fa-snapchat",
+  tiktok: "fa-tiktok"
+};
 
-    Object.keys(icons).forEach(key => {
-      if (data[key]) {
-        socials.innerHTML += `
-          <a href="${data[key]}" target="_blank">
-            <i class="fa-brands ${icons[key]}"></i>
-          </a>
-        `;
-      }
-    });
+Object.keys(socialMap).forEach(key => {
+  if (data[key]) {
+    const a = document.createElement("a");
+    a.href = data[key];
+    a.target = "_blank";
+    a.innerHTML = `<i class="fa-brands ${socialMap[key]}"></i>`;
+    socialsDiv.appendChild(a);
+  }
+});
   });
 };
