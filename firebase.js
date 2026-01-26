@@ -37,8 +37,14 @@ window.onload = () => {
     setText("job", data.job);
     setText("company", data.company);
 
-    setLink("phone", data.phone ? `tel:${data.phone}` : "");
-    setLink("email", data.email ? `mailto:${data.email}` : "");
+    if (data.phone) {
+  document.getElementById("phone").href = "tel:" + data.phone.trim();
+}
+
+if (data.email) {
+  document.getElementById("email").href = "mailto:" + data.email.trim();
+}
+
 
     const socialsDiv = document.getElementById("socials");
 socialsDiv.innerHTML = "";
