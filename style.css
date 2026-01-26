@@ -6,20 +6,25 @@ body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, sans-serif;
   background: #f2f2f2;
+
   display: flex;
   justify-content: center;
+  align-items: flex-start;   /* 🔥 مهم */
+  padding-top: 20px;         /* 🔥 مهم */
 }
 
 /* ===== CARD ===== */
 .card {
   width: 100%;
-  max-width: 520px;     /* نفس إحساس الصورة */
+  max-width: 520px;
   background: #fff;
   border-radius: 28px;
   margin: 16px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.15);
   overflow: hidden;
+  padding-bottom: 24px;   /* 🔥 */
 }
+
 
 /* ===== COVER ===== */
 .cover {
@@ -33,23 +38,17 @@ body {
   height: 140px;
   border-radius: 50%;
   border: 6px solid #fff;
-  margin: -70px auto 12px;
+  margin: -70px auto 20px;
   display: block;
+  position: relative;
+  z-index: 2;   /* 🔥 يمنع التغطية */
 }
+
 
 /* ===== TEXT ===== */
-h2 {
-  text-align: center;
-  margin: 8px 0 4px;
-  font-size: 26px;
-  font-weight: 700;
-}
-
-p {
-  text-align: center;
-  margin: 0 0 22px;
-  color: #777;
-  font-size: 15px;
+h2, p {
+  position: relative;
+  z-index: 2;
 }
 
 /* ===== PHONE + EMAIL ===== */
@@ -123,4 +122,18 @@ p {
   .card {
     max-width: 560px;
   }
+  @media (max-width: 480px) {
+  .socials {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
 }
