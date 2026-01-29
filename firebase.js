@@ -29,25 +29,48 @@ window.onload = function () {
     document.getElementById("job").innerText = data.job || "";
 
     if (data.phone) {
-      document.getElementById("phone").href = `tel:${data.phone}`;
-    }
+  document.getElementById("phone").href =
+    "tel:" + data.phone.replace(/\s+/g, '');
+}
 
-    if (data.email) {
-      document.getElementById("email").href = `mailto:${data.email}`;
-    }
+if (data.email) {
+  document.getElementById("email").href =
+    "mailto:" + data.email.trim();
+}
+
 
     // socials
     const socialsDiv = document.getElementById("socials");
-    socialsDiv.innerHTML = "";
+socialsDiv.innerHTML = "";
 
-    if (data.socials) {
-      Object.keys(data.socials).forEach((key) => {
-        const a = document.createElement("a");
-        a.href = data.socials[key];
-        a.target = "_blank";
-        a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
-        socialsDiv.appendChild(a);
-      });
+const socialMap = {
+  facebook: "fa-facebook-f",
+  instagram: "fa-instagram",
+  whatsapp: "fa-whatsapp",
+  snapchat: "fa-snapchat",
+  tiktok: "fa-tiktok"
+};
+
+Object.keys(socialMap).forEach(key => {
+  if (data[key]) {
+
+    let url = data[key].trim();
+
+    // 🔥 لو مفيش https يضيفه تلقائي
+    if (!url.startsWith("http")) {
+      url = "https://" + url;
     }
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+
+    a.innerHTML = `<i class="fa-brands ${socialMap[key]}"></i>`;
+
+    socialsDiv.appendChild(a);
+  }
+});
+
   });
 };
