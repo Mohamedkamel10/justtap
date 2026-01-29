@@ -87,7 +87,7 @@ window.onload = function () {
       socialsDiv.innerHTML = "";
 
       const socialMap = {
-        facebook: "fa-facebook-f",
+        facebook: "fa-facebook",
         instagram: "fa-instagram",
         whatsapp: "fa-whatsapp",
         snapchat: "fa-snapchat",
