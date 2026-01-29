@@ -1,12 +1,16 @@
-// Firebase config
 var firebaseConfig = {
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
   projectId: "just-tap-4e85e"
 };
 
-firebase.initializeApp(firebaseConfig);
+// الحل هنا 👇
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 var db = firebase.firestore();
+
 
 // get username from url
 const params = new URLSearchParams(window.location.search);
