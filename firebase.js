@@ -1,10 +1,11 @@
+// FIREBASE CONFIG
 var firebaseConfig = {
   apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
   authDomain: "just-tap-4e85e.firebaseapp.com",
   projectId: "just-tap-4e85e"
 };
 
-// الحل هنا 👇
+// يمنع duplicate-app
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
@@ -12,16 +13,20 @@ if (!firebase.apps.length) {
 var db = firebase.firestore();
 
 
-// get username from url
+// USERNAME
 const params = new URLSearchParams(window.location.search);
 const username = params.get("user");
 
-if (!username) {
-  console.error("No user found in URL");
-}
 
-window.onload = function () {
-  db.collection("users").doc(username).get().then((doc) => {
+// LOAD DATA
+window.addEventListener("DOMContentLoaded", async () => {
+
+  if (!username) return;
+
+  try {
+
+    const doc = await db.collection("users").doc(username).get();
+
     if (!doc.exists) {
       console.error("User not found");
       return;
@@ -29,101 +34,56 @@ window.onload = function () {
 
     const data = doc.data();
 
-    document.getElementById("name").innerText = data.name || "";
-    document.getElementById("job").innerText = data.job || "";
+    // TEXT
+    document.getElementById("name").textContent = data.name || "";
+    document.getElementById("job").textContent = data.job || "";
 
+    // IMAGES
+    if (data.avatar) {
+      document.getElementById("avatar").src = data.avatar;
+    }
+
+    if (data.cover) {
+      document.getElementById("cover").style.backgroundImage =
+        `url('${data.cover}')`;
+    }
+
+    // PHONE
     if (data.phone) {
       document.getElementById("phone").href = `tel:${data.phone}`;
     }
 
+    // EMAIL
     if (data.email) {
       document.getElementById("email").href = `mailto:${data.email}`;
     }
 
-    // socials
-    var firebaseConfig = {
-  apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
-  authDomain: "just-tap-4e85e.firebaseapp.com",
-  projectId: "just-tap-4e85e"
-};
+    // SOCIALS
+    const socialsDiv = document.getElementById("socials");
+    socialsDiv.innerHTML = "";
 
-firebase.initializeApp(firebaseConfig);
-var db = firebase.firestore();
+    if (data.socials) {
 
-const params = new URLSearchParams(window.location.search);
-const username = params.get("user");
+      Object.entries(data.socials).forEach(([key, value]) => {
 
-window.onload = function () {
+        if (!value) return;
 
-  if (!username) {
-    console.error("No user in URL");
-    return;
-  }
-
-  db.collection("users").doc(username).get()
-    .then((doc) => {
-
-      if (!doc.exists) {
-        console.error("User not found");
-        return;
-      }
-
-      const data = doc.data();
-
-      // ✅ name + job
-      document.getElementById("name").innerText = data.name || "";
-      document.getElementById("job").innerText = data.job || "";
-
-      // ✅ phone
-      if (data.phone) {
-        document.getElementById("phone").href =
-          "tel:" + data.phone.replace(/\s+/g, '');
-      }
-
-      // ✅ email
-      if (data.email) {
-        document.getElementById("email").href =
-          "mailto:" + data.email.trim();
-      }
-
-      // ✅ SOCIAL ICONS
-      const socialsDiv = document.getElementById("socials");
-      socialsDiv.innerHTML = "";
-
-      const socialMap = {
-        facebook: "fa-facebook",
-        instagram: "fa-instagram",
-        whatsapp: "fa-whatsapp",
-        snapchat: "fa-snapchat",
-        tiktok: "fa-tiktok"
-      };
-
-      Object.keys(socialMap).forEach(key => {
-
-        if (!data[key]) return;
-
-        let url = data[key];
-
-        // يحل مشكلة الروابط اللي بدون https
-        if (!url.startsWith("http")) {
-          url = "https://" + url;
-        }
+        // يمنع فتح نفس الصفحة
+        const link =
+          value.startsWith("http") ? value : `https://${value}`;
 
         const a = document.createElement("a");
-        a.href = url;
+        a.href = link;
         a.target = "_blank";
 
-        a.innerHTML =
-          `<i class="fa-brands ${socialMap[key]}"></i>`;
+        a.innerHTML = `<i class="fa-brands fa-${key}"></i>`;
 
         socialsDiv.appendChild(a);
       });
+    }
 
-    })
-    .catch(err => {
-      console.error("Firestore error:", err);
-    });
-};
+  } catch (err) {
+    console.error("Firestore Error:", err);
+  }
 
-  });
-};
+});
