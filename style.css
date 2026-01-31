@@ -83,7 +83,6 @@ p {
   border-radius: 18px;
   display: flex;
   justify-content: center;
-  align-items: center;
   font-size: 32px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
