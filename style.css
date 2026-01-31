@@ -1,133 +1,101 @@
-/* =====================
-   Reset & Base
-===================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Cairo', sans-serif;
+*{
+  box-sizing:border-box;
 }
 
-body {
-  background: #f2f2f2;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:#f2f3f7;
+  display:flex;
+  justify-content:center;
 }
 
-a {
-  text-decoration: none !important;
-  color: inherit;
+/* CARD */
+.card{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  border-radius:26px;
+  margin:20px;
+  box-shadow:0 25px 60px rgba(0,0,0,.15);
+  overflow:hidden;
 }
 
-/* =====================
-   Profile Card
-===================== */
-.profile-card {
-  background: #ffffff;
-  width: 100%;
-  max-width: 380px;
-  padding: 25px 20px 30px;
-  border-radius: 22px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-  text-align: center;
+/* COVER */
+.cover{
+  height:240px;
+  background:center/cover no-repeat;
 }
 
-/* =====================
-   Profile Image
-===================== */
-.profile-image {
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 15px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid #eee;
+/* AVATAR */
+.avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  border:6px solid #fff;
+  margin:-75px auto 10px;
+  display:block;
 }
 
-.profile-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* TEXT */
+h2{
+  text-align:center;
+  margin:10px 0 5px;
+  font-size:28px;
 }
 
-/* =====================
-   Name & Job
-===================== */
-.profile-name {
-  font-size: 22px;
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 6px;
+p{
+  text-align:center;
+  color:#777;
+  margin-bottom:20px;
 }
 
-.profile-job {
-  font-size: 15px;
-  color: #777;
-  margin-bottom: 20px;
+/* ACTIONS */
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  margin-bottom:25px;
 }
 
-/* =====================
-   Actions (Phone / Email)
-===================== */
-.actions {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 22px;
+.actions a{
+  width:65px;
+  height:65px;
+  background:#000;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:26px;
+  text-decoration:none;
 }
 
-.actions a {
-  width: 52px;
-  height: 52px;
-  background: linear-gradient(135deg, #000, #333);
-  color: #fff;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  margin: 0 6px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  transition: all 0.3s ease;
+/* SOCIAL BOX */
+.socials{
+  background:#f7f7f7;
+  margin:0 20px 25px;
+  padding:20px;
+  border-radius:24px;
+
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
 
-.actions a:hover {
-  transform: scale(1.12);
-  background: linear-gradient(135deg, #444, #000);
+.socials a{
+  background:#fff;
+  height:80px;
+  border-radius:18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:36px;
+  text-decoration:none;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
-/* =====================
-   Social Icons
-===================== */
-.social {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.social a {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: #fff;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
-
-.social a:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-}
-
-/* =====================
-   Platform Colors
-===================== */
+/* COLORS */
 .social a.instagram { color: #E1306C; }
 .social a.facebook { color: #1877F2; }
 .social a.whatsapp { color: #25D366; }
@@ -136,20 +104,20 @@ a {
 .social a.linkedin { color: #0A66C2; }
 .social a.snapchat { color: #FFFC00; }
 
-/* =====================
-   Responsive
-===================== */
-@media (max-width: 480px) {
-  .profile-card {
-    margin: 20px;
-    padding: 22px 18px 26px;
-  }
+/* MOBILE */
+@media(max-width:600px){
 
-  .profile-name {
-    font-size: 20px;
-  }
+.card{
+  margin:10px;
+}
 
-  .profile-job {
-    font-size: 14px;
-  }
+.cover{
+  height:200px;
+}
+
+.avatar{
+  width:130px;
+  height:130px;
+}
+
 }
