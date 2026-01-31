@@ -5,7 +5,7 @@
   <title>JustTap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- FONT AWESOME -->
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -14,35 +14,30 @@
   <!-- CSS -->
   <link rel="stylesheet" href="./style.css" />
 
-  <!-- Firebase v8 -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-  <link rel="icon" href="data:,">
-
+  <!-- favicon fix -->
+  <link rel="icon" href="data:," />
 </head>
 
 <body>
 
-<div class="card">
+  <div class="card">
+    <div class="cover"></div>
 
-  <div id="cover" class="cover"></div>
+    <img class="avatar" src="./assets/images/avatar.jpg" />
 
-  <img id="avatar" class="avatar" src="./assets/images/avatar.jpg" />
+    <h2 id="name"></h2>
+    <p id="job"></p>
 
-  <h2 id="name"></h2>
-  <p id="job"></p>
+    <div class="actions">
+      <a id="phone"><i class="fa-solid fa-phone"></i></a>
+      <a id="email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
 
-  <div class="actions">
-    <a id="phone"><i class="fa-solid fa-phone"></i></a>
-    <a id="email"><i class="fa-solid fa-envelope"></i></a>
+    <div id="socials" class="socials"></div>
   </div>
 
-  <div id="socials" class="socials"></div>
-
-</div>
-
-<script src="./firebase.js"></script>
+  <!-- JS (module مهم جدا) -->
+  <script type="module" src="./js/profile.js"></script>
 
 </body>
 </html>
