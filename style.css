@@ -64,7 +64,7 @@ p {
   justify-content: center;
   align-items: center;
   font-size: 22px;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .socials {
@@ -84,10 +84,8 @@ p {
   display: flex;
   justify-content: center;
   font-size: 32px;
+  align-items: center;
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-.social a,
-.actions a {
   text-decoration: none !important;
 }
 
