@@ -1,98 +1,76 @@
-// ✅ Firebase config
+// Firebase config (الجديد)
 var firebaseConfig = {
   apiKey: "AIzaSyDD2mzGNR3gKwn-hCkQDkUE729sC8BnqVc",
   authDomain: "justtap-c7fde.firebaseapp.com",
-  projectId: "justtap-c7fde",
+  projectId: "justtap-c7fde"
 };
 
-// 🔥 يمنع خطأ duplicate-app
+// يمنع duplicate-app
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
 var db = firebase.firestore();
 
-
-// ✅ icon mapping (المهم جدا)
+// icon mapping
 const iconMap = {
   facebook: "facebook-f",
   instagram: "instagram",
   snapchat: "snapchat",
   tiktok: "tiktok",
   whatsapp: "whatsapp",
-  twitter: "x-twitter",
   linkedin: "linkedin-in"
 };
 
-
-// get username
+// get user from URL
 const params = new URLSearchParams(window.location.search);
 const username = params.get("user");
 
 if (!username) {
-  console.error("No user found in URL");
+  alert("No user in URL");
 }
 
+db.collection("users").doc(username).get().then(doc => {
+  if (!doc.exists) {
+    alert("User not found");
+    return;
+  }
 
-window.onload = function () {
+  const data = doc.data();
 
-  db.collection("users").doc(username).get()
-  .then((doc) => {
+  // name & job
+  document.getElementById("name").textContent = data.name || "";
+  document.getElementById("job").textContent =
+    `${data.job || ""}${data.company ? " - " + data.company : ""}`;
 
-    if (!doc.exists) {
-      console.error("User not found");
-      return;
-    }
+  // phone
+  if (data.phone) {
+    document.getElementById("phone").href = `tel:${data.phone}`;
+  }
 
-    const data = doc.data();
+  // email
+  if (data.email) {
+    document.getElementById("email").href = `mailto:${data.email}`;
+  }
 
-    // ✅ basic info
-    document.getElementById("name").innerText = data.name || "";
-    document.getElementById("job").innerText =
-      `${data.job || ""} ${data.company ? "- " + data.company : ""}`;
+  // socials
+  const socialsDiv = document.getElementById("socials");
+  socialsDiv.innerHTML = "";
 
+  if (data.socials) {
+    Object.keys(data.socials).forEach(key => {
+      const url = data.socials[key];
+      if (!url) return;
 
-    // ✅ phone
-    if (data.phone) {
-      document.getElementById("phone").href = `tel:${data.phone}`;
-    }
+      const a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
 
-    // ✅ email
-    if (data.email) {
-      document.getElementById("email").href = `mailto:${data.email}`;
-    }
+      const icon = iconMap[key] || key;
+      a.innerHTML = `<i class="fa-brands fa-${icon}"></i>`;
 
-
-    // ✅ socials
-    const socialsDiv = document.getElementById("socials");
-    socialsDiv.innerHTML = "";
-
-    if (data.socials) {
-
-      Object.keys(data.socials).forEach((key) => {
-
-        const url = data.socials[key];
-        if (!url) return;
-
-        const icon = iconMap[key] || key;
-
-        const a = document.createElement("a");
-        a.href = url;
-        a.target = "_blank";
-
-        // 🔥 يمنع ان الصفحة تفتح جوه موقعك
-        a.rel = "noopener noreferrer";
-
-        a.innerHTML = `<i class="fa-brands fa-${icon}"></i>`;
-
-        socialsDiv.appendChild(a);
-      });
-
-    }
-
-  })
-  .catch(err => {
-    console.error("Firestore error:", err);
-  });
-
-};
+      socialsDiv.appendChild(a);
+    });
+  }
+});
