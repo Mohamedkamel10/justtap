@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 
-/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, sans-serif;
@@ -10,15 +9,14 @@ body {
 
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   padding: 20px 0;
 }
 
-/* ===== CARD ===== */
+/* CARD */
 .card {
   width: 100%;
   max-width: 520px;
-  background: #ffffff;
+  background: #fff;
   border-radius: 28px;
   margin: 0 16px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
@@ -26,46 +24,37 @@ body {
   padding-bottom: 24px;
 }
 
-/* ===== COVER ===== */
+/* COVER */
 .cover {
   height: 220px;
-  background: url("/justtap/assets/images/cover.jpg") center / cover no-repeat;
+  background: url("./assets/images/cover.jpg") center / cover no-repeat;
 }
 
-/* ===== AVATAR ===== */
+/* AVATAR */
 .avatar {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  border: 6px solid #ffffff;
+  border: 6px solid #fff;
   margin: -70px auto 18px;
   display: block;
-  position: relative;
-  z-index: 2;
-  background: #fff;
 }
 
-/* ===== TEXT ===== */
+/* TEXT */
 h2 {
   text-align: center;
   margin: 8px 0 4px;
   font-size: 26px;
   font-weight: 700;
-  color: #111;
-  position: relative;
-  z-index: 2;
 }
 
 p {
   text-align: center;
-  margin: 0 0 22px;
+  margin-bottom: 22px;
   color: #777;
-  font-size: 15px;
-  position: relative;
-  z-index: 2;
 }
 
-/* ===== PHONE + EMAIL ===== */
+/* ACTIONS */
 .actions {
   display: flex;
   justify-content: center;
@@ -84,18 +73,12 @@ p {
   align-items: center;
   font-size: 24px;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.actions a:hover {
-  transform: scale(1.08);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-/* ===== SOCIAL CONTAINER ===== */
+/* SOCIALS */
 .socials {
   background: #f6f6f6;
-  margin: 0 20px 24px;
+  margin: 0 20px;
   padding: 22px;
   border-radius: 26px;
 
@@ -104,9 +87,8 @@ p {
   gap: 16px;
 }
 
-/* ===== SOCIAL ITEM ===== */
 .socials a {
-  background: #ffffff;
+  background: #fff;
   height: 76px;
   border-radius: 18px;
 
@@ -116,62 +98,25 @@ p {
 
   font-size: 34px;
   text-decoration: none;
-
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.socials a:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
-}
-
-/* ===== ICON COLORS ===== */
+/* ICON COLORS */
 .fa-whatsapp { color: #25D366; }
 .fa-facebook,
 .fa-facebook-f { color: #1877F2; }
 .fa-instagram { color: #E1306C; }
 .fa-snapchat { color: #FFFC00; }
-.fa-tiktok { color: #000000; }
-.fa-twitter { color: #1DA1F2; }
+.fa-tiktok { color: #000; }
+.fa-x-twitter { color: #000; }
 .fa-linkedin { color: #0A66C2; }
 
-/* ===== لو أيقونة واحدة ===== */
-.socials a.single {
-  grid-column: span 2;
-}
-
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media (max-width: 480px) {
-  h2 {
-    font-size: 22px;
-  }
-
-  p {
-    font-size: 14px;
-  }
-
+  h2 { font-size: 22px; }
   .avatar {
     width: 120px;
     height: 120px;
     margin-top: -60px;
-  }
-
-  .actions a {
-    width: 54px;
-    height: 54px;
-    font-size: 22px;
-  }
-}
-
-/* ===== DESKTOP ===== */
-@media (min-width: 900px) {
-  body {
-    align-items: center;
-    height: 100vh;
-  }
-
-  .card {
-    max-width: 560px;
   }
 }
