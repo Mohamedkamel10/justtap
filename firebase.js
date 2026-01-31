@@ -1,8 +1,8 @@
 // ✅ Firebase config
 var firebaseConfig = {
-  apiKey: "AIzaSyBgIH7EBZy-FFipEtBf0u1Db5uH6tVGKW8",
-  authDomain: "just-tap-4e85e.firebaseapp.com",
-  projectId: "just-tap-4e85e"
+  apiKey: "AIzaSyDD2mzGNR3gKwn-hCkQDkUE729sC8BnqVc",
+  authDomain: "justtap-c7fde.firebaseapp.com",
+  projectId: "justtap-c7fde",
 };
 
 // 🔥 يمنع خطأ duplicate-app
