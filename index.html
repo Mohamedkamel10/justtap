@@ -6,38 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
   <!-- CSS -->
   <link rel="stylesheet" href="./style.css" />
 
-  <!-- favicon fix -->
-  <link rel="icon" href="data:," />
+  <!-- Firebase v8 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+  <!-- يمنع خطأ favicon -->
+  <link rel="icon" href="data:,">
 </head>
 
 <body>
 
-  <div class="card">
-    <div class="cover"></div>
+<div class="card">
 
-    <img class="avatar" src="./assets/images/avatar.jpg" />
+  <div class="cover"></div>
 
-    <h2 id="name"></h2>
-    <p id="job"></p>
+  <img class="avatar" src="./assets/images/avatar.jpg" />
 
-    <div class="actions">
-      <a id="phone"><i class="fa-solid fa-phone"></i></a>
-      <a id="email"><i class="fa-solid fa-envelope"></i></a>
-    </div>
+  <h2 id="name"></h2>
+  <p id="job"></p>
 
-    <div id="socials" class="socials"></div>
+  <div class="actions">
+    <a id="phone" target="_blank"><i class="fa-solid fa-phone"></i></a>
+    <a id="email" target="_blank"><i class="fa-solid fa-envelope"></i></a>
   </div>
 
-  <!-- JS (module مهم جدا) -->
-  <script type="module" src="./js/profile.js"></script>
+  <div id="socials" class="socials"></div>
 
+</div>
+
+<script src="./firebase.js"></script>
 </body>
 </html>
