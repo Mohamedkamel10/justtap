@@ -1,45 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <title>JustTap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="./style.css" />
-
-  <!-- Firebase v8 -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-  <!-- يمنع خطأ favicon -->
-  <link rel="icon" href="data:,">
+<meta charset="UTF-8">
+<title>JustTap</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="card">
-
-  <div class="cover"></div>
-
-  <img class="avatar" src="./assets/images/avatar.jpg" />
-
+  <div id="cover" class="cover"></div>
+  <img id="avatar" class="avatar">
   <h2 id="name"></h2>
   <p id="job"></p>
 
-  <div class="actions">
-    <a id="phone" target="_blank"><i class="fa-solid fa-phone"></i></a>
-    <a id="email" target="_blank"><i class="fa-solid fa-envelope"></i></a>
-  </div>
-
   <div id="socials" class="socials"></div>
-
 </div>
 
-<script src="./firebase.js"></script>
+<script type="module">
+import { getUser } from "./firebase.js";
+
+const username = new URLSearchParams(window.location.search).get("user");
+const data = await getUser(username);
+
+if (!data) {
+  document.body.innerHTML = "User not found";
+}
+
+name.innerText = data.name;
+job.innerText = data.job;
+avatar.src = data.avatar;
+cover.style.backgroundImage = `url(${data.cover})`;
+
+Object.keys(data.socials).forEach(k => {
+  if (!data.socials[k]) return;
+  const a = document.createElement("a");
+  a.href = data.socials[k];
+  a.target = "_blank";
+  a.innerText = k;
+  socials.appendChild(a);
+});
+</script>
+
 </body>
 </html>
