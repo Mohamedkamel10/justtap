@@ -1,76 +1,35 @@
-// Firebase config (الجديد)
-var firebaseConfig = {
+// Firebase v9+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+const firebaseConfig = {
   apiKey: "AIzaSyDD2mzGNR3gKwn-hCkQDkUE729sC8BnqVc",
   authDomain: "justtap-c7fde.firebaseapp.com",
-  projectId: "justtap-c7fde"
+  projectId: "justtap-c7fde",
+  storageBucket: "justtap-c7fde.appspot.com",
+  messagingSenderId: "467024881082",
+  appId: "1:467024881082:web:5d88dbba462c9dc999a983"
 };
 
-// يمنع duplicate-app
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+
+// رفع صورة
+export async function uploadImage(file, path) {
+  const imageRef = ref(storage, path);
+  await uploadBytes(imageRef, file);
+  return await getDownloadURL(imageRef);
 }
 
-var db = firebase.firestore();
-
-// icon mapping
-const iconMap = {
-  facebook: "facebook-f",
-  instagram: "instagram",
-  snapchat: "snapchat",
-  tiktok: "tiktok",
-  whatsapp: "whatsapp",
-  linkedin: "linkedin-in"
-};
-
-// get user from URL
-const params = new URLSearchParams(window.location.search);
-const username = params.get("user");
-
-if (!username) {
-  alert("No user in URL");
+// حفظ يوزر
+export async function saveUser(username, data) {
+  await setDoc(doc(db, "users", username), data);
 }
 
-db.collection("users").doc(username).get().then(doc => {
-  if (!doc.exists) {
-    alert("User not found");
-    return;
-  }
-
-  const data = doc.data();
-
-  // name & job
-  document.getElementById("name").textContent = data.name || "";
-  document.getElementById("job").textContent =
-    `${data.job || ""}${data.company ? " - " + data.company : ""}`;
-
-  // phone
-  if (data.phone) {
-    document.getElementById("phone").href = `tel:${data.phone}`;
-  }
-
-  // email
-  if (data.email) {
-    document.getElementById("email").href = `mailto:${data.email}`;
-  }
-
-  // socials
-  const socialsDiv = document.getElementById("socials");
-  socialsDiv.innerHTML = "";
-
-  if (data.socials) {
-    Object.keys(data.socials).forEach(key => {
-      const url = data.socials[key];
-      if (!url) return;
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-
-      const icon = iconMap[key] || key;
-      a.innerHTML = `<i class="fa-brands fa-${icon}"></i>`;
-
-      socialsDiv.appendChild(a);
-    });
-  }
-});
+// جلب يوزر
+export async function getUser(username) {
+  const snap = await getDoc(doc(db, "users", username));
+  return snap.exists() ? snap.data() : null;
+}
