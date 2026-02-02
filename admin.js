@@ -12,6 +12,17 @@ window.save = async function () {
   const username = document.getElementById("username").value.trim();
   if (!username) return alert("Username required");
 
+  const coverInput = document.getElementById("coverInput");
+
+  let coverURL = "";
+
+if (coverInput.files.length > 0) {
+  coverURL = await uploadImage(
+    coverInput.files[0],
+    `covers/${username}.jpg`
+  );
+}
+
   const avatarFile = document.getElementById("avatar").files[0];
 
   let avatarUrl = "";
@@ -25,6 +36,7 @@ window.save = async function () {
     phone: document.getElementById("phone").value,
     email: document.getElementById("email").value,
     avatar: avatarUrl,
+    cover: coverURL,
     socials: {
       facebook: facebook.value,
       instagram: instagram.value,
