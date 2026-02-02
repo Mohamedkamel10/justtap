@@ -26,7 +26,9 @@ body {
 /* COVER */
 .cover {
   height: 220px;
-  background: url("./assets/images/cover.jpg") center/cover no-repeat;
+  background-color: #ddd;
+  background-position: center;
+  background-size: cover;
 }
 
 /* AVATAR */
