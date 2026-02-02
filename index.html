@@ -1,45 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>JustTap</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="./style.css" />
-
-  <!-- Firebase v8 -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-  <!-- يمنع خطأ favicon -->
-  <link rel="icon" href="data:,">
+  <meta charset="UTF-8">
+  <title>JustTap Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./admin.css">
 </head>
-
 <body>
 
-<div class="card">
+<div class="admin-card">
 
-  <div class="cover"></div>
+  <h2>➕ Add New User</h2>
 
-  <img class="avatar" src="./assets/images/avatar.jpg" />
+  <input type="password" id="adminPass" placeholder="Admin Password">
 
-  <h2 id="name"></h2>
-  <p id="job"></p>
+  <input id="username" placeholder="Username (doc id)">
+  <input id="name" placeholder="Name">
+  <input id="job" placeholder="Job">
+  <input id="phone" placeholder="Phone">
+  <input id="email" placeholder="Email">
 
-  <div class="actions">
-    <a id="phone" target="_blank"><i class="fa-solid fa-phone"></i></a>
-    <a id="email" target="_blank"><i class="fa-solid fa-envelope"></i></a>
-  </div>
+  <input id="facebook" placeholder="Facebook link">
+  <input id="instagram" placeholder="Instagram link">
+  <input id="snapchat" placeholder="Snapchat link">
+  <input id="twitter" placeholder="Twitter (X) link">
+  <input id="linkedin" placeholder="LinkedIn link">
+    <input id="whatsapp" placeholder="Whatapp link">
 
-  <div id="socials" class="socials"></div>
+
+  <label>Avatar Image</label>
+  <input type="file" id="avatar">
+
+  <button onclick="save()">Save User</button>
+
+  <p id="status"></p>
 
 </div>
 
-<script src="./firebase.js"></script>
+<script type="module" src="./admin.js"></script>
 </body>
 </html>
