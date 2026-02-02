@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JustTap Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+
+<div class="admin-card">
+
+  <h2>➕ Add New User</h2>
+
+  <input type="password" id="adminPass" placeholder="Admin Password">
+
+  <input id="username" placeholder="Username (doc id)">
+  <input id="name" placeholder="Name">
+  <input id="job" placeholder="Job">
+  <input id="phone" placeholder="Phone">
+  <input id="email" placeholder="Email">
+
+  <input id="facebook" placeholder="Facebook link">
+  <input id="instagram" placeholder="Instagram link">
+  <input id="snapchat" placeholder="Snapchat link">
+  <input id="twitter" placeholder="Twitter (X) link">
+  <input id="linkedin" placeholder="LinkedIn link">
+    <input id="whatsapp" placeholder="Whatapp link">
+
+
+  <label>Avatar Image</label>
+  <input type="file" id="avatar">
+
+  <button onclick="save()">Save User</button>
+
+  <p id="status"></p>
+
+</div>
+
+<script type="module" src="./admin.js"></script>
+</body>
+</html>

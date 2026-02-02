@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.admin-card {
+  background: #fff;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: .9;
+}
+
+#status {
+  text-align: center;
+  margin-top: 10px;
+}
