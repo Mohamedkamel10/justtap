@@ -23,6 +23,12 @@ async function loadUser() {
     alert("User not found");
     return;
   }
+  const coverDiv = document.querySelector(".cover");
+
+if (data.cover) {
+  coverDiv.style.backgroundImage = `url(${data.cover})`;
+}
+
 
   // basic info
   document.getElementById("name").innerText = data.name || "";
