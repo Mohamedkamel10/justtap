@@ -1,19 +1,24 @@
-import { saveUser, uploadImage } from "./firebase.js";
+// admin.js
+import { db } from "./firebase.js";
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"; 
 
-document.getElementById("adminForm").addEventListener("submit", async (e) => {
+
+const form = document.getElementById("adminForm");
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const username = document.getElementById("username").value.trim();
   if (!username) {
-    alert("اكتب اسم اليوزر");
+    alert("Username required");
     return;
   }
 
   const data = {
     name: document.getElementById("name").value,
     job: document.getElementById("job").value,
-    phone: document.getElementById("phone").value,
     email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
     socials: {
       instagram: document.getElementById("instagram").value,
       whatsapp: document.getElementById("whatsapp").value,
@@ -24,13 +29,14 @@ document.getElementById("adminForm").addEventListener("submit", async (e) => {
       linkedin: document.getElementById("linkedin").value,
       
     }
+    createdAt: Date.now()
   };
 
   try {
-    await saveUser(username, data);
-    alert("✅ اتحفظ بنجاح");
+    await setDoc(doc(db, "users", username), data);
+    alert("✅ Saved successfully");
   } catch (err) {
     console.error(err);
-    alert("❌ حصل خطأ");
+    alert("❌ Error saving");
   }
 });
