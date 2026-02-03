@@ -1,46 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>JustTap Admin</title>
+  <title>Admin Panel - JustTap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./admin.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
-<div class="admin-card">
+  <div class="admin-container">
+    <h2>إضافة / تعديل يوزر</h2>
 
-  <h2>➕ Add New User</h2>
+    <!-- الفورم -->
+    <form id="adminForm">
 
-  <input type="password" id="adminPass" placeholder="Admin Password">
+      <label>اسم اليوزر (username)</label>
+      <input type="text" id="username" placeholder="مثال: mohamed" required>
 
-  <input id="username" placeholder="Username (doc id)">
-  <input id="name" placeholder="Name">
-  <input id="job" placeholder="Job">
-  <input id="phone" placeholder="Phone">
-  <input id="email" placeholder="Email">
+      <label>اسم الشركة</label>
+      <input type="text" id="company">
 
-  <input id="facebook" placeholder="Facebook link">
-  <input id="instagram" placeholder="Instagram link">
-  <input id="snapchat" placeholder="Snapchat link">
-  <input id="twitter" placeholder="Twitter (X) link">
-  <input id="linkedin" placeholder="LinkedIn link">
-    <input id="whatsapp" placeholder="Whatapp link">
+      <label>الوظيفة</label>
+      <input type="text" id="job">
 
+      <label>الإيميل</label>
+      <input type="email" id="email">
 
-  <label>Avatar Image</label>
-  <input type="file" id="avatar">
-  
-  <label>Cover Image</label>
-<input type="file" id="coverInput" accept="image/*">
+      <label>رقم الهاتف</label>
+      <input type="text" id="phone">
 
+      <label>واتساب</label>
+      <input type="text" id="whatsapp">
 
-  <button onclick="save()">Save User</button>
+      <label>انستجرام</label>
+      <input type="text" id="instagram">
 
-  <p id="status"></p>
+      <label>فيسبوك</label>
+      <input type="text" id="facebook">
 
-</div>
+      <label>سناب شات</label>
+      <input type="text" id="snapchat">
 
-<script type="module" src="admin.js"></script>
+      <label>لينكدإن</label>
+      <input type="text" id="linkedin">
+
+      <label>تويتر / X</label>
+      <input type="text" id="twitter">
+
+      <label>الصورة الشخصية (Avatar)</label>
+      <input type="file" id="avatar">
+
+      <label>صورة الغلاف (Cover)</label>
+      <input type="file" id="cover">
+
+      <button type="submit">💾 حفظ البيانات</button>
+    </form>
+
+    <p id="status"></p>
+  </div>
+
+  <!-- JS (مهم جدًا type="module") -->
+  <script type="module" src="admin.js"></script>
+
 </body>
 </html>
