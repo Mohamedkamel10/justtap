@@ -12,7 +12,6 @@ document.getElementById("adminForm").addEventListener("submit", async (e) => {
   const data = {
     name: document.getElementById("name").value,
     job: document.getElementById("job").value,
-    company: document.getElementById("company").value,
     phone: document.getElementById("phone").value,
     email: document.getElementById("email").value,
     socials: {
