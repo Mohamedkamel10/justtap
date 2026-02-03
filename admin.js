@@ -1,42 +1,41 @@
-// admin.js
-import { db } from "./firebase.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"; 
+import { uploadImage, saveUser } from "./firebase-config.js";
 
+const ADMIN_PASSWORD = "123456"; // غيرها براحتك
 
-const form = document.getElementById("adminForm");
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+window.save = async function () {
+  const pass = document.getElementById("adminPass").value;
+  if (pass !== ADMIN_PASSWORD) {
+    alert("Wrong password");
+    return;
+  }
 
   const username = document.getElementById("username").value.trim();
-  if (!username) {
-    alert("Username required");
-    return;
+  if (!username) return alert("Username required");
+
+  const avatarFile = document.getElementById("avatar").files[0];
+
+  let avatarUrl = "";
+  if (avatarFile) {
+    avatarUrl = await uploadImage(avatarFile, `avatars/${username}.jpg`);
   }
 
   const data = {
     name: document.getElementById("name").value,
     job: document.getElementById("job").value,
-    email: document.getElementById("email").value,
     phone: document.getElementById("phone").value,
+    email: document.getElementById("email").value,
+    avatar: avatarUrl,
     socials: {
-      instagram: document.getElementById("instagram").value,
-      whatsapp: document.getElementById("whatsapp").value,
-      snapchat: document.getElementById("snapchat").value,
-      facebook: document.getElementById("facebook").value,
-      tiktok: document.getElementById("tiktok").value,
-      twitter: document.getElementById("twitter").value,
-      linkedin: document.getElementById("linkedin").value,
-      
+      facebook: facebook.value,
+      instagram: instagram.value,
+      snapchat: snapchat.value,
+      twitter: twitter.value,
+      linkedin: linkedin.value,
+      whatsapp: whatsapp.value,
+      tiktok: tiktok.value
     }
-    createdAt: Date.now()
   };
 
-  try {
-    await setDoc(doc(db, "users", username), data);
-    alert("✅ Saved successfully");
-  } catch (err) {
-    console.error(err);
-    alert("❌ Error saving");
-  }
-});
+  await saveUser(username, data);
+  document.getElementById("status").innerText = "✅ User Saved Successfully";
+};
