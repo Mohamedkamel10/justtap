@@ -1,12 +1,35 @@
-// firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getFirestore, doc, setDoc, getDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getStorage, ref, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDD2mzGNR3gKwn-hCkQDkUE729sC8BnqVc",
   authDomain: "justtap-c7fde.firebaseapp.com",
-  projectId: "justtap-c7fde"
+  projectId: "justtap-c7fde",
+  storageBucket: "justtap-c7fde.appspot.com",
+  messagingSenderId: "467024881082",
+  appId: "1:467024881082:web:5d88dbba462c9dc999a983"
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const storage = getStorage(app);
+
+export async function uploadImage(file, path) {
+  const imageRef = ref(storage, path);
+  await uploadBytes(imageRef, file);
+  return await getDownloadURL(imageRef);
+}
+
+export async function saveUser(username, data) {
+  await setDoc(doc(db, "users", username), data);
+}
+
+export async function getUser(username) {
+  const snap = await getDoc(doc(db, "users", username));
+  return snap.exists() ? snap.data() : null;
+}
