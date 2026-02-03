@@ -12,7 +12,15 @@ window.save = async function () {
   const username = document.getElementById("username").value.trim();
   if (!username) return alert("Username required");
 
-  const coverInput = document.getElementById("coverInput");
+
+  const avatarFile = document.getElementById("avatar").files[0];
+
+  let avatarUrl = "";
+  if (avatarFile) {
+    avatarUrl = await uploadImage(avatarFile, `avatars/${username}.jpg`);
+  }
+  
+const coverInput = document.getElementById("coverInput");
 let coverURL = "";
 
 if (coverInput.files.length > 0) {
@@ -21,21 +29,13 @@ if (coverInput.files.length > 0) {
     `covers/${username}.jpg`
   );
 }
-
-
-  const avatarFile = document.getElementById("avatar").files[0];
-
-  let avatarUrl = "";
-  if (avatarFile) {
-    avatarUrl = await uploadImage(avatarFile, `avatars/${username}.jpg`);
-  }
-
   const data = {
     name: document.getElementById("name").value,
     job: document.getElementById("job").value,
     phone: document.getElementById("phone").value,
     email: document.getElementById("email").value,
     avatar: avatarUrl,
+    cover: coverUrl,
     socials: {
       facebook: facebook.value,
       instagram: instagram.value,
