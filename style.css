@@ -132,3 +132,15 @@ p {
     height: 120px;
   }
 }
+.powered{
+  text-align:center;
+  margin:25px 0;
+  font-size:13px;
+  color:#888;
+  letter-spacing:1px;
+}
+
+.powered span{
+  color:#111;
+  font-weight:600;
+}
