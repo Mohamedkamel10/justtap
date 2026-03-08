@@ -36,8 +36,8 @@ body {
 
 /* AVATAR */
 .avatar {
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 7px solid #fff;
   object-fit:cover;
