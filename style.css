@@ -39,7 +39,8 @@ body {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  border: 6px solid #fff;
+  border: 7px solid #fff;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
   margin: -70px auto 16px;
   display: block;
   background: #fff;
