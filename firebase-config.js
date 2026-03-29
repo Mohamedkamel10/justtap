@@ -8,7 +8,7 @@ import {
 
 const firebaseConfig = {
   apiKey: "AIzaSyDD2mzGNR3gKwn-hCkQDkUE729sC8BnqVc",
-  authDomain: "jus-tt-ap.com",
+  authDomain: "justtap-c7fde.firebaseapp.com",
   projectId: "justtap-c7fde",
   storageBucket: "justtap-c7fde.appspot.com",
   messagingSenderId: "467024881082",
