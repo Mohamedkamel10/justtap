@@ -1,9 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore, doc, setDoc, getDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getStorage, ref, uploadBytes, getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-// إعدادات مشروعك (كما هي)
+// إعدادات مشروعك كما هي
 const firebaseConfig = {
   apiKey: "AIzaSyDD2mzGNR3gKwn-hCkQDkUE729sC8BnqVc",
   authDomain: "justtap-c7fde.firebaseapp.com",
@@ -13,67 +16,64 @@ const firebaseConfig = {
   appId: "1:467024881082:web:5d88dbba462c9dc999a983"
 };
 
-// تهيئة Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app);
-const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
 
-// دالة استخراج اسم المستخدم من الرابط (URL)
-// مثال: www.jus-tt-ap.com/mohamed -> يعطينا "mohamed"
-function getUsernameFromURL() {
-    const path = window.location.pathname; // المسار بعد الدومين
-    const segments = path.split('/').filter(segment => segment.length > 0);
-    
-    // إذا كان الرابط هو الدومين فقط، قد ترغب في توجيهه لصفحة رئيسية
-    if (segments.length === 0 || segments[0] === 'index.html') return null;
-    
-    return segments[0]; // يعيد أول كلمة بعد / وهي اسم المستخدم
+// --- الدوال الأساسية الخاصة بك ---
+
+export async function uploadImage(file, path) {
+  const imageRef = ref(storage, path);
+  await uploadBytes(imageRef, file);
+  return await getDownloadURL(imageRef);
 }
 
-// دالة جلب بيانات المستخدم وعرضها
-async function loadUserProfile() {
+export async function saveUser(username, data) {
+  await setDoc(doc(db, "users", username), data);
+}
+
+export async function getUser(username) {
+  const snap = await getDoc(doc(db, "users", username));
+  return snap.exists() ? snap.data() : null;
+}
+
+// --- الجزء الجديد الخاص بالدومين www.jus-tt-ap.com/mohamed ---
+
+/**
+ * دالة لاستخراج اسم المستخدم من الرابط تلقائياً
+ * تعمل مع الروابط المباشرة (باستخدام خدعة 404.html) أو الروابط العادية
+ */
+export function getUsernameFromURL() {
+    const path = window.location.pathname; // مثال: /mohamed
+    const segments = path.split('/').filter(s => s.length > 0 && s !== 'index.html');
+    
+    if (segments.length > 0) {
+        return segments[0]; // سيعيد "mohamed"
+    }
+    return null;
+}
+
+/**
+ * دالة التشغيل التلقائي عند فتح الدومين الجديد
+ */
+export async function initProfilePage() {
     const username = getUsernameFromURL();
-
-    if (!username) {
-        console.log("أنت في الصفحة الرئيسية");
-        return;
-    }
-
-    try {
-        const userRef = doc(db, "users", username);
-        const userSnap = await getDoc(userRef);
-
-        if (userSnap.exists()) {
-            const data = userSnap.data();
-            console.log("تم جلب بيانات المستخدم:", data);
-            
-            // تحديث العناصر في الـ HTML (تأكد أن هذه الـ IDs موجودة في ملف الـ HTML)
-            if(document.getElementById('user-name')) {
-                document.getElementById('user-name').innerText = data.name || username;
-            }
-            if(document.getElementById('user-bio')) {
-                document.getElementById('user-bio').innerText = data.bio || "No bio available";
-            }
-            // إذا كان هناك صورة بروفايل
-            if(data.profilePic && document.getElementById('user-img')) {
-                document.getElementById('user-img').src = data.profilePic;
-            }
-
+    
+    if (username) {
+        console.log("جاري البحث عن اليوزر:", username);
+        const userData = await getUser(username);
+        
+        if (userData) {
+            console.log("تم العثور على بيانات اليوزر بنجاح من الدومين الجديد");
+            // هنا يمكنك استدعاء دالة لعرض البيانات في صفحتك
+            // renderProfile(userData); 
+            return userData;
         } else {
-            console.error("المستخدم " + username + " غير موجود في Firestore");
-            // يمكنك توجيه المستخدم لصفحة 404 أو الصفحة الرئيسية
+            console.error("اليوزر غير موجود في Firestore");
         }
-    } catch (error) {
-        console.error("خطأ في جلب البيانات:", error);
     }
+    return null;
 }
 
-// تشغيل الدالة عند تحميل الصفحة
-window.addEventListener('DOMContentLoaded', loadUserProfile);
-
-// مراقبة حالة التسجيل (للتأكد من عمل الدومين الجديد)
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        console.log("Logged in on: " + window.location.hostname);
-    }
+// تشغيل الفحص تلقائياً فور تحميل الصفحة
+window.addEventListener('DOMContentLoaded', initProfilePage);
