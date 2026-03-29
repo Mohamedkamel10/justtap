@@ -1,0 +1,6 @@
+const path = window.location.pathname; // ستجلب "/mohamed"
+const username = path.split('/').pop(); // ستأخذ "mohamed"
+
+if (username && username !== "index.html") {
+    loadUserData(username); // استدعاء دالة جلب البيانات من Firestore
+}
